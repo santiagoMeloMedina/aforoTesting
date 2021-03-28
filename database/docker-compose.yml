@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db:
+    build: .
+    container_name: db
+    ports:
+      - '4000:3306'
+    expose:
+      - '4000'
+    networks:
+      - aforo
+
+networks:
+  aforo:
+    external: true
