@@ -1,29 +1,29 @@
 
 from flask import Blueprint, jsonify
-import service.user as UserService
+import service.citizen as CitizenService
 import const.values as VALUES
 
-app = Blueprint("user", __name__)
+app = Blueprint("citizen", __name__)
 
-@app.route("/user", methods=['GET'])
-def user():
-    return jsonify({'res': 'hello user'})
+@app.route("/citizen", methods=['GET'])
+def citizen():
+    return jsonify({'res': 'hello citizen'})
 
-@app.route("/user/add", methods=['POST'])
+@app.route("/citizen/add", methods=['POST'])
 def add():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
-        response = UserService.addUser()
+        response = CitizenService.addCitizen()
         result[VALUES.REPONSE] = response
     except Exception as e:
         print(e)
     return jsonify(result)
 
-@app.route("/user/get", methods=['POST'])
+@app.route("/citizen/get", methods=['POST'])
 def get():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
-        response = UserService.getUser()
+        response = CitizenService.getCitizen()
         result[VALUES.REPONSE] = response
     except Exception as e:
         print(e)

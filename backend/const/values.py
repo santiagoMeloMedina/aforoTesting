@@ -1,0 +1,3 @@
+
+REPONSE = "response"
+ERROR = "error"
