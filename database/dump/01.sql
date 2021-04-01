@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS PublicEstablishment(
 CREATE TABLE IF NOT EXISTS Entries(
     id INT AUTO_INCREMENT PRIMARY KEY,
     inDate TIMESTAMP NOT NULL DEFAULT NOW(),
-    outDate TIMESTAMP NOT NULL DEFAULT NOW(),
+    outDate TIMESTAMP DEFAULT NULL,
     citizenUsername varchar(255) NOT NULL,
     publicEstUsername varchar(255) NOT NUll,
     temperature FLOAT(4,2) NOT NULL,
