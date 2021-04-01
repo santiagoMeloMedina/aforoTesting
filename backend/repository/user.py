@@ -19,7 +19,7 @@ def getUser(username):
     result = db.query(query,values)
     return result
 
-def checkPassword(username):
+def getPassword(username):
     query = "SELECT password from User where username=%s"
     values = (username,)
     result = db.query(query,values)
