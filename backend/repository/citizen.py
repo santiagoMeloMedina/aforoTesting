@@ -42,7 +42,7 @@ def getRiskLevel(age,housemates,occupation):
     valuesAge = ("age",age)
     valuesHousemates = ("housemates",housemates)
     valuesOccupation = ("ocuppation",occupation)
-    result = db.query(query,valuesAge)+db.query(query,valuesHousemates)+db.query(query,valuesOccupation)
+    result = [db.query(query,valuesAge),db.query(query,valuesHousemates),db.query(query,valuesOccupation)]
     return result
 
 

@@ -19,5 +19,12 @@ def getUser(username):
     result = db.query(query,values)
     return result
 
+def checkUpdate(username):
+    query = "SELECT password from User where username=%s"
+    values = (username,)
+    result = db.query(query,values)
+    return result
+    
+
 
 
