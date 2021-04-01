@@ -19,7 +19,7 @@ For development we will be using `pipenv`. These are the steps for it.
 
 
 #### Run configuration
-Before running this sevice, you must set the aforoDB and the following environmental variables. (Information below for default environmental variables)
+Before running this sevice, **you must set the aforoDB mysql service** and the following environmental variables. (Information below for default environmental variables)
 
 > __DB_HOST__ &#8594; DB ip
 > __DB_PORT__ &#8594; Self-explanatory
@@ -36,6 +36,9 @@ These values will be used by the system in case environamental variables are not
 > __DB_USER__ &#8594; "root"
 > __DB_NAME__ &#8594; "aforo"
 
-
+After all of this you can run 
+    ```
+        python3 main.py
+    ```
 
 ### 🎉
