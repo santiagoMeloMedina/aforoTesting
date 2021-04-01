@@ -13,14 +13,16 @@ class DB:
         )
         self.cursor = self.db.cursor()
 
-    def query(self, query):
-        return self.cursor.execute(query)
+    def query(self, query,values):
+        #return self.cursor.execute(query)
+        exe = self.cursor.execute(query,values)
+        return exe.fetchall()
 
-    def crud(self, query):
-        self.cursor.execute(query)
+    def crud(self,query,values):
+        self.cursor.execute(query,values)
         self.db.commit()
 
-    def close():
+    def close(self):
         self.db.close()
     
 
