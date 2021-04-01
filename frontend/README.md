@@ -4,9 +4,9 @@ This is the client for the [backend flask project](https://github.com/santiagoMe
 
 #### Install Conf
 1. Install nvm ([here's some instructions](https://github.com/nvm-sh/nvm))
-2. On the frontend folder utilize `nvm install`, o si ya tiene instalada la version de node correcta `nvm use`.
+2. On the frontend folder use `nvm install`, or if already installed correct version use `nvm use`.
 3. Install **yarn** globally by using `npm install -g yarn`.
-4. Luego para instalar los paquetes necesarios utilice `yarn` .
-5. Finalmente para ejecutar el projecto en modo de desarrollo `yarn dev`.
+4. Then to install necessary packages use `yarn` .
+5. Finally to run de project use `yarn dev`.
 
 ### 🎉
