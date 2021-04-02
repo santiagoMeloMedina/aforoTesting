@@ -21,3 +21,39 @@ def getCitizen():
     if get:
         result = Citizen().setArr(get[0]).toMap()
     return result
+
+def updateName():
+    result = None
+    payload = dict(request.get_json())
+    update = CitizenRepo.updateName(payload['username'],payload['names'])
+    if update:
+        result = Citizen().setArr(update[0]).toMap()
+    return result
+
+def updateLastName():
+    result = None
+    payload = dict(request.get_json())
+    update = CitizenRepo.updateLastname(payload['username'],payload['lastnames'])
+    if update:
+        result = Citizen().setArr(update[0]).toMap()
+    return result
+
+def getEntries():#check this service!!
+    result = None
+    payload = dict(request.get_json())
+    get = CitizenRepo.getEntriesCitizen(payload['username'])
+    if get:
+        result = get
+    return result
+
+def getRisk():
+    result = None
+    payload = dict(request.get_json())
+    get = CitizenRepo.getRiskLevel(payload['age'],payload['housemates'],payload['occupation'])
+    if get:
+        result = get
+    return result
+
+
+
+

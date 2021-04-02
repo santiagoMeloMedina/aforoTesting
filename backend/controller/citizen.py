@@ -28,3 +28,38 @@ def get():
     except Exception as e:
         print(e)
     return jsonify(result)
+
+
+@app.route("/citizen/entries", methods=['POST'])
+def entries():
+    result = { VALUES.REPONSE: VALUES.ERROR }
+    try:
+        response = CitizenService.getEntries()
+        result[VALUES.REPONSE] = response
+    except Exception as e:
+        print(e)
+    return jsonify(result)
+
+
+@app.route("/citizen/update_name", methods=['POST'])
+def updateName():
+    result = { VALUES.REPONSE: VALUES.ERROR }
+    try:
+        response = CitizenService.updateName()
+        result[VALUES.REPONSE] = response
+    except Exception as e:
+        print(e)
+    return jsonify(result)
+
+
+
+@app.route("/citizen/update_lastname", methods=['POST'])
+def updateLastname():
+    result = { VALUES.REPONSE: VALUES.ERROR }
+    try:
+        response = CitizenService.updateLastName()
+        result[VALUES.REPONSE] = response
+    except Exception as e:
+        print(e)
+    return jsonify(result)
+

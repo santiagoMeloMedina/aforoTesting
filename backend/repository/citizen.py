@@ -15,13 +15,13 @@ def getCitizen(username):
     return result
 
 def updateName(username,newName):
-    query = "UPDATE Citizen set name = %s where username = %s"
+    query = "UPDATE Citizen set names = %s where username = %s"
     values = (newName,username)
     result = db.crud(query,values)
     return result
 
 def updateLastname(username,newLastname):
-    query = "UPDATE Citizen set name = %s where username = %s"
+    query = "UPDATE Citizen set lastnames = %s where username = %s"
     values = (newLastname,username)
     result = db.crud(query,values)
     return result
@@ -36,8 +36,8 @@ def getRiskLevel(age,housemates,occupation):
     query = "SELECT percent from Parameters where tpe = %s and val = %s"
     valuesAge = ("age",age)
     valuesHousemates = ("housemates",housemates)
-    valuesOccupation = ("ocuppation",occupation)
-    result = db.query(query,valuesAge)+db.query(query,valuesHousemates)+db.query(query,valuesOccupation)
+    valuesOccupation = ("occupation",occupation)
+    result = [db.query(query,valuesAge),db.query(query,valuesHousemates),db.query(query,valuesOccupation)]
     return result
 
 
