@@ -1,3 +1,4 @@
+
 class PublicEstablishment:
     def __init__(self, username=None, name=None,category=None,capacity=None,actual=None,**kwargs):
         self.username = username

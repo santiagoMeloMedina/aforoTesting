@@ -1,4 +1,4 @@
-import repository.publicEst as PublicEstRepo
+import repository.publicEstablishment as PublicEstRepo
 import repository.user as UserRepo
 from flask import request
 from model.publicEstablishment import PublicEstablishment
@@ -9,9 +9,14 @@ def addPublicEstablishment():
     payload = dict(request.get_json())
     add_user = UserRepo.insertUser(payload["username"], payload["password"], payload["city"], payload["neighborhood"])
     if add_user:
-        added = PublicEstRepo.insertPublicEstablishment(payload['username'],payload['name'],payload['category'] ,payload['capacity'])
-        if added > 0:
-            result = payload["username"]
+        try:
+            added = PublicEstRepo.insertPublicEstablishment(payload['username'],payload['name'],payload['category'] ,payload['capacity'])
+            if added > 0:
+                result = payload["username"]
+            else:
+                UserRepo.deleteUser(payload["username"])
+        except Exception as e:
+            UserRepo.deleteUser(payload["username"])
     return result
 
 def getPublicEstablishment():
@@ -22,10 +27,10 @@ def getPublicEstablishment():
         result = PublicEstablishment().setArr(get[0]).toMap()
     return result
 
-def updateName():
+def update():
     result = None
     payload = dict(request.get_json())
-    update = PublicEstRepo.updateName(payload['username'],payload['name'])
+    update = PublicEstRepo.update(PublicEstablishment(**payload))
     if update:
         result = PublicEstablishment().setArr(update[0]).toMap()
     return result

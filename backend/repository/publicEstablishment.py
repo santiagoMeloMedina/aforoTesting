@@ -1,7 +1,7 @@
+
 from conf.db import db
-
 from datetime import date, datetime, timedelta
-
+from model.publicEstablishment import PublicEstablishment
 
 
 def insertPublicEstablishment(username,name,category ,capacity):
@@ -12,13 +12,17 @@ def insertPublicEstablishment(username,name,category ,capacity):
 
 
 def getPublicEstablishment(username):
-    query = "SELECT username,name,category,capacity,actual values from PublicEstablishment where username=%s"
+    query = "SELECT * from PublicEstablishment where username=%s"
     values = (username,)
     result = db.query(query,values)
     return result
 
-def updateName(username,newName):
-    query = "UPDATE PublicEstablishment set name = %s where username = %s"
+def update(publicEst):
+    mapped = publicEst.toMap()
+    fields = ["name", "category", "capacity", "actual"]
+    subquery = ' '.join([f"set {field} = %s" if mapped[field] is not None else "" for field in fields])
+    query = f"UPDATE PublicEstablishment {subquery} where username = %s"
+    print(query)
     values = (newName,username)
     result = db.crud(query,values)
     return result

@@ -29,8 +29,6 @@ def get():
         print(e)
     return jsonify(result)
 
-
-
 @app.route("/publicEstablishment/entries", methods=['POST'])
 def entries():
     result = { VALUES.REPONSE: VALUES.ERROR }
@@ -42,11 +40,11 @@ def entries():
     return jsonify(result)
 
 
-@app.route("/publicEstablishment/update_name", methods=['POST'])
-def updateName():
+@app.route("/publicEstablishment/update", methods=['PUT'])
+def update():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
-        response = PublicEstablishmentService.updateName()
+        response = PublicEstablishmentService.update()
         result[VALUES.REPONSE] = response
     except Exception as e:
         print(e)
