@@ -29,37 +29,22 @@ def get():
         print(e)
     return jsonify(result)
 
-
-@app.route("/citizen/entries", methods=['POST'])
-def entries():
+@app.route("/citizen/entries-citizen", methods=['POST'])
+def getEntriesCitizen():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
-        response = CitizenService.getEntries()
+        response = CitizenService.getEntriesCitizen()
         result[VALUES.REPONSE] = response
     except Exception as e:
         print(e)
     return jsonify(result)
 
-
-@app.route("/citizen/update_name", methods=['POST'])
-def updateName():
+@app.route("/citizen/update", methods=['PUT'])
+def update():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
-        response = CitizenService.updateName()
+        response = CitizenService.update()
         result[VALUES.REPONSE] = response
     except Exception as e:
         print(e)
     return jsonify(result)
-
-
-
-@app.route("/citizen/update_lastname", methods=['POST'])
-def updateLastname():
-    result = { VALUES.REPONSE: VALUES.ERROR }
-    try:
-        response = CitizenService.updateLastName()
-        result[VALUES.REPONSE] = response
-    except Exception as e:
-        print(e)
-    return jsonify(result)
-

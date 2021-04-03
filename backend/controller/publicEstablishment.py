@@ -13,7 +13,7 @@ def publicEstablishment():
 def add():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
-        response = PublicEstablishmentService.addPublicEstablishment()
+        response = PublicEstablishmentService.add()
         result[VALUES.REPONSE] = response
     except Exception as e:
         print(e)
@@ -23,7 +23,7 @@ def add():
 def get():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
-        response = PublicEstablishmentService.getPublicEstablishment()
+        response = PublicEstablishmentService.get()
         result[VALUES.REPONSE] = response
     except Exception as e:
         print(e)
@@ -39,7 +39,6 @@ def entries():
         print(e)
     return jsonify(result)
 
-
 @app.route("/publicEstablishment/update", methods=['PUT'])
 def update():
     result = { VALUES.REPONSE: VALUES.ERROR }
@@ -49,3 +48,24 @@ def update():
     except Exception as e:
         print(e)
     return jsonify(result)
+
+@app.route("/publicEstablishment/register-entry", methods=['POST'])
+def registerEntry():
+    result = { VALUES.REPONSE: VALUES.ERROR }
+    try:
+        response = PublicEstablishmentService.registerEntry()
+        result[VALUES.REPONSE] = response
+    except Exception as e:
+        print(e)
+    return jsonify(result)
+
+@app.route("/publicEstablishment/register-exit", methods=['POST'])
+def registerExit():
+    result = { VALUES.REPONSE: VALUES.ERROR }
+    try:
+        response = PublicEstablishmentService.registerExit()
+        result[VALUES.REPONSE] = response
+    except Exception as e:
+        print(e)
+    return jsonify(result)
+

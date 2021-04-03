@@ -2,15 +2,15 @@ import repository.publicEstablishment as PublicEstRepo
 import repository.user as UserRepo
 from flask import request
 from model.publicEstablishment import PublicEstablishment
+from datetime import datetime
 
-
-def addPublicEstablishment():
+def add():
     result = None
     payload = dict(request.get_json())
     add_user = UserRepo.insertUser(payload["username"], payload["password"], payload["city"], payload["neighborhood"])
     if add_user:
         try:
-            added = PublicEstRepo.insertPublicEstablishment(payload['username'],payload['name'],payload['category'] ,payload['capacity'])
+            added = PublicEstRepo.add(payload['username'],payload['name'],payload['category'] ,payload['capacity'])
             if added > 0:
                 result = payload["username"]
             else:
@@ -19,10 +19,10 @@ def addPublicEstablishment():
             UserRepo.deleteUser(payload["username"])
     return result
 
-def getPublicEstablishment():
+def get():
     result = None
     payload = dict(request.get_json())
-    get = PublicEstRepo.getPublicEstablishment(payload["username"])
+    get = PublicEstRepo.get(payload["username"])
     if get:
         result = PublicEstablishment().setArr(get[0]).toMap()
     return result
@@ -31,22 +31,34 @@ def update():
     result = None
     payload = dict(request.get_json())
     update = PublicEstRepo.update(PublicEstablishment(**payload))
-    if update:
-        result = PublicEstablishment().setArr(update[0]).toMap()
+    if update > 0:
+        result = get()
     return result
 
-
-def registerEntry():#revisar que el usuario este registrado antes de entrar
+def registerEntry():
     result = None
     payload = dict(request.get_json())
-    add_entry = PublicEstRepo.registerEntry(payload['citizenUsername'],payload['publicEstUsername'],payload['temperature'],payload['mask'])
-    if add_entry:
-        result = payload['citizenUsername']
+    register = PublicEstRepo.registerEntry(payload['citizenUsername'],payload['publicEstUsername'],payload['temperature'],payload['mask'])
+    if register:
+        result = { 
+                    "username": payload['citizenUsername'], 
+                    "publicEstablishment": payload['publicEstUsername'], 
+                    "date": datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
+                }
     return result
 
-
-#TODO registerExit()
-
+def registerExit():
+    result = None
+    payload = dict(request.get_json())
+    register = PublicEstRepo.registerExit(payload['citizenUsername'],payload['publicEstUsername'])
+    print(register)
+    if register:
+        result = { 
+                    "username": payload['citizenUsername'], 
+                    "publicEstablishment": payload['publicEstUsername'], 
+                    "date": datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
+                }
+    return result
 
 def getEntries():
     result = None
