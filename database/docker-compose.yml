@@ -13,4 +13,3 @@ services:
 
 networks:
   aforo:
-    external: true
