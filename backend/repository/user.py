@@ -11,5 +11,11 @@ def insertUser(username, password, city, neighborhood):
 def getUser(username):
     query = "SELECT * FROM User where username=%s"
     values = (username,)
-    result = db.query(query,values)
+    result = db.query(query, values)
+    return result
+
+def deleteUser(username):
+    query = "DELETE FROM User where username=%s"
+    values = (username,)
+    result = db.crud(query, values)
     return result
