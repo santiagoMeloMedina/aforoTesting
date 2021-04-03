@@ -3,18 +3,18 @@
 This is the backend service for the [frontend nextjs project](https://github.com/santiagoMeloMedina/aforoTesting/tree/dev/frontend) in this aforoTesting repository.
 
 #### Install configuration
-For development we will be using `pipenv`. These are the steps for it.
-1. Install pipenv ([Here's some instructions](https://pypi.org/project/pipenv/))
+For development we will be using `poetry`. These are the steps for it.
+1. Install `poetry` with
+    ```
+        pip3 install poetry
+    ```
 2. On the backend root folder use below command to get into virtual environment
     ```
-        pipenv shell
+        poetry shell
     ```
 3. Use following commands to install main packages and dev packages
     ```
-        pipenv install
-    ```
-    ```
-        pipenv install --dev
+        poetry install
     ```
 
 
@@ -36,7 +36,7 @@ These values will be used by the system in case environamental variables are not
 > __DB_USER__ &#8594; "root"
 > __DB_NAME__ &#8594; "aforo"
 
-After all of this you can run 
+After all of this you can run on the `src` folder
     ```
         python3 main.py
     ```
