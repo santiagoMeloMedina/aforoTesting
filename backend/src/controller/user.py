@@ -28,3 +28,13 @@ def get():
     except Exception as e:
         print(e)
     return jsonify(result)
+
+@app.route("/user/auth", methods=['POST'])
+def auth():
+    result = { VALUES.REPONSE : VALUES.ERROR}
+    try:
+        response = UserService.authenticate()
+        result[VALUES.REPONSE] = response
+    except Exception as e:
+        print(e)
+    return jsonify(result)

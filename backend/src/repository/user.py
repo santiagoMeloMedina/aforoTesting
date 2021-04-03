@@ -19,3 +19,9 @@ def deleteUser(username):
     values = (username,)
     result = db.crud(query, values)
     return result
+
+def authenticate(username, password):
+    query = "SELECT * FROM User where username=%s and pssword=%s"
+    values = (username, password)
+    result = db.query(query, values)
+    return result
