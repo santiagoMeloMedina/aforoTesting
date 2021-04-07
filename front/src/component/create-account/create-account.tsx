@@ -1,23 +1,20 @@
 
 import { connect } from 'react-redux';
 import { Component } from 'react';
-import styles from './login.module.css';
+import styles from './create-account.module.css';
 
-import { authenticate } from '../../client/user';
+interface CreateAccountProps {}
+interface CreateAccountState {}
 
-import Auth from '../../util/auth';
-
-interface LoginProps {}
-interface LoginState {}
-
-class Login extends Component<LoginProps, LoginState> {
+class CreateAccount extends Component<CreateAccountProps, CreateAccountState> {
 
     private email: string = null;
     private password: string = null;
+    private cpassword: string = null;
 
     constructor(props: any) {
         super(props);
-        this.login = this.login.bind(this);
+        this.createAccount = this.createAccount.bind(this);
         this.changeInput = this.changeInput.bind(this);
     }
 
@@ -29,14 +26,15 @@ class Login extends Component<LoginProps, LoginState> {
             case "password":
                 this.password = e.target.value;
                 break;
+            case "cpassword":
+                this.cpassword = e.target.value;
+                break;
         }
     }
 
-    login() {
-        if (this.email && this.password) {
-            authenticate(this.email, this.password).then(result => {
-                Auth.setTokenCookie(result);
-            })
+    createAccount() {
+        if (this.email && this.password && this.password == this.cpassword) {
+            console.log(this.email, this.password)
         }
     }
 
@@ -47,11 +45,12 @@ class Login extends Component<LoginProps, LoginState> {
                 <div className={styles.fields}>
                     <input placeholder={"Correo Electronico"} onChange={(e) => this.changeInput(e, "email")}></input>
                     <input placeholder={"Contraseña"} type="password" onChange={(e) => this.changeInput(e, "password")}></input>
-                    <button onClick={this.login}>Inicia sesión</button>
+                    <input placeholder={"Confirmar Contraseña"} type="password" onChange={(e) => this.changeInput(e, "cpassword")}></input>
+                    <button onClick={this.createAccount}>Create Account</button>
                 </div>
             </div>
         );
     }
 }
 
-export default connect(null, null)(Login);
+export default connect(null, null)(CreateAccount);
