@@ -36,6 +36,7 @@ class Login extends Component<LoginProps, LoginState> {
         if (this.email && this.password) {
             authenticate(this.email, this.password).then(result => {
                 Auth.setTokenCookie(result);
+                window.location.reload();
             })
         }
     }

@@ -1,6 +1,6 @@
 
 .image {
-    position: relative;
+    position: absolute;
     transform: translate(-50%, 0);
     left: 50%;
 }
@@ -19,10 +19,7 @@
     margin: 10px 0 0 0;
 }
 
-.button {
-    position: relative;
-    transform: translate(-50%, -50%);
-    left: 50%;
+.fields button {
     margin: 20px 0 0 0;
     height: 40px;
     border: none;
@@ -31,12 +28,12 @@
     border-radius: 15px;
 }
 
-.button:hover {
+.fields button:hover {
     color: white;
     background-color: lightskyblue;
 }
 
-.button:active {
+.fields button:active {
     color: white;
     background-color: lightblue;
 }

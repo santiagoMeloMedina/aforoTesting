@@ -2,6 +2,8 @@
 from flask import Blueprint, jsonify
 import service.citizen as CitizenService
 import const.values as VALUES
+from conf.auth import auth
+import const.roles as ROLES
 
 app = Blueprint("citizen", __name__)
 
@@ -20,6 +22,7 @@ def add():
     return jsonify(result)
 
 @app.route("/citizen/get", methods=['POST'])
+@auth(ROLES.CITIZEN)
 def get():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
@@ -30,6 +33,7 @@ def get():
     return jsonify(result)
 
 @app.route("/citizen/entries-citizen", methods=['POST'])
+@auth(ROLES.CITIZEN)
 def getEntriesCitizen():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
@@ -40,6 +44,7 @@ def getEntriesCitizen():
     return jsonify(result)
 
 @app.route("/citizen/update", methods=['PUT'])
+@auth(ROLES.CITIZEN)
 def update():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:

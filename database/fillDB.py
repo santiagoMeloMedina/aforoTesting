@@ -15,7 +15,9 @@ def initializeCities():
     ans = list(ans)
     ans.sort()
     return ans
+    
 print(initializeCities())
+
 def fillAgeRisk():
     tpe,age,percent,ans = "age",0,0.1,list()
     for age in range(100):

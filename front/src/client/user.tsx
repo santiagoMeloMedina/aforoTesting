@@ -13,3 +13,17 @@ export function authenticate(username: string, password: string): Promise<string
         });
     });
 }
+
+export function create_account(username: string, password: string, neigh: string, city: string): Promise<string> {
+    const body: any = {
+        username,
+        password,
+        neigh,
+        city
+    }
+    return new Promise<string>((resolve, reject) => {
+        post(CONST.ENDPOINT.USER.CREATE_ACCOUNT.URL, body).then(result => {
+            resolve(result["response"]);
+        });
+    });
+}

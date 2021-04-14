@@ -11,9 +11,7 @@ export default class Auth {
         let data: any = null;
         try {
             data = jwt_decode(tokenCookie);
-            console.log(data)
         } catch (error) {
-            console.log(error);
         }
         const authed: boolean = data && data["user"] ? true : false;
         return authed;
@@ -26,6 +24,10 @@ export default class Auth {
 
     static setTokenCookie(token: string) {
         Cookies.set("token", token);
+    }
+
+    static delTokenCookie() {
+        Cookies.remove("token")
     }
 
 }

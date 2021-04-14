@@ -2,6 +2,8 @@
 from flask import Blueprint, jsonify
 import service.publicEstablishment as PublicEstablishmentService
 import const.values as VALUES
+from conf.auth import auth
+import const.roles as ROLES
 
 app = Blueprint("publicEstablishment", __name__)
 
@@ -20,6 +22,7 @@ def add():
     return jsonify(result)
 
 @app.route("/publicEstablishment/get", methods=['POST'])
+@auth(ROLES.PUBLIC_ESTABLISHMENT)
 def get():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
@@ -30,6 +33,7 @@ def get():
     return jsonify(result)
 
 @app.route("/publicEstablishment/entries", methods=['POST'])
+@auth(ROLES.PUBLIC_ESTABLISHMENT)
 def entries():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
@@ -40,6 +44,7 @@ def entries():
     return jsonify(result)
 
 @app.route("/publicEstablishment/update", methods=['PUT'])
+@auth(ROLES.PUBLIC_ESTABLISHMENT)
 def update():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
@@ -50,6 +55,7 @@ def update():
     return jsonify(result)
 
 @app.route("/publicEstablishment/register-entry", methods=['POST'])
+@auth(ROLES.PUBLIC_ESTABLISHMENT)
 def registerEntry():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
@@ -60,6 +66,7 @@ def registerEntry():
     return jsonify(result)
 
 @app.route("/publicEstablishment/register-exit", methods=['POST'])
+@auth(ROLES.PUBLIC_ESTABLISHMENT)
 def registerExit():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:

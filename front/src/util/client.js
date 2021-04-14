@@ -25,44 +25,47 @@ export function post(url, body, headers={}, params={}) {
         })
     })
 }
-// Arreglar todos los demas!!!
+
 export function get(url, headers={}, params={}) {
     return new Promise((resolve, reject) => {
-        fetch({
-            url: completeUrl(url, params),
+        fetch(completeUrl(url, params), {
             method: "GET",
             headers: {
                 Authorization: Auth.getToken(),
                 ...headers
             }
+        }).then(response => response.json()).then(data => {
+            resolve(data)
         })
     })
 }
 
 export function put(url, body, headers={}, params={}) {
     return new Promise((resolve, reject) => {
-        fetch({
-            url: completeUrl(url, params),
+        fetch(completeUrl(url, params), {
             method: "PUT",
             headers: {
                 Authorization: Auth.getToken(),
                 ...headers
             },
             body: body
+        }).then(response => response.json()).then(data => {
+            resolve(data)
         })
     })
 }
 
 export function del(url, body, headers={}, params={}) {
     return new Promise((resolve, reject) => {
-        fetch({
-            url: completeUrl(url, params),
+        fetch(completeUrl(url, params), {
             method: "DELETE",
             headers: {
                 Authorization: Auth.getToken(),
                 ...headers
             },
             body: body
+        }).then(response => response.json()).then(data => {
+            resolve(data)
         })
     })
 }

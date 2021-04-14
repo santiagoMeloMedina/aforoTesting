@@ -3,7 +3,7 @@ import repository.user as UserRepo
 from flask import request
 from model.user import User
 import jwt
-from const.keys import SECRET_JWT_KEY as SK
+from const.keys import SECRET_JWT_KEY as SK, JWT_ALGORITHM as JWT_ALG
 
 def addUser():
     result = None
@@ -25,7 +25,7 @@ def authenticate():
     result = None
     payload = dict(request.get_json())
     auth = UserRepo.authenticate(payload["username"], payload["password"])
-    encoded = jwt.encode({"user" : payload["username"]}, SK, algorithm="HS256")
+    encoded = jwt.encode({"user" : payload["username"]}, SK, algorithm=JWT_ALG)
     if auth:
         result = encoded
     return result
