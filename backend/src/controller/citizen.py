@@ -15,7 +15,7 @@ def citizen():
 def add():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
-        response = CitizenService.addCitizen()
+        response = CitizenService.add()
         result[VALUES.REPONSE] = response
     except Exception as e:
         print(e)
@@ -26,7 +26,7 @@ def add():
 def get():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
-        response = CitizenService.getCitizen()
+        response = CitizenService.get()
         result[VALUES.REPONSE] = response
     except Exception as e:
         print(e)
