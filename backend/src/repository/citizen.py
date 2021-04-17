@@ -32,12 +32,10 @@ def getEntriesCitizen(username):
     result = db.query(query,values)
     return result
 
-# def getRiskLevel(age,housemates,occupation):
-#     query = "SELECT percent from Parameters where tpe = %s and val = %s"
-#     valuesAge = ("age",age)
-#     valuesHousemates = ("housemates",housemates)
-#     valuesOccupation = ("occupation",occupation)
-#     result = [db.query(query,valuesAge),db.query(query,valuesHousemates),db.query(query,valuesOccupation)]
-#     return result
-
-
+def getRiskLevel(age,housemates,occupation):
+    query = "SELECT percent from Parameters where tpe = %s and val = %s"
+    valuesAge = ("age",age)
+    valuesHousemates = ("housemates",housemates)
+    valuesOccupation = ("occupation",occupation)
+    result = db.query(query,valuesAge)[0][0] + db.query(query,valuesHousemates)[0][0] + db.query(query,valuesOccupation)[0][0]
+    return result
