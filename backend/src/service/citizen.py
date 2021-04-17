@@ -43,14 +43,10 @@ def update():
         result = get()
     return result
 
-# def getRisk():
-#     result = None
-#     payload = dict(request.get_json())
-#     get = CitizenRepo.getRiskLevel(payload['age'],payload['housemates'],payload['occupation'])
-#     if get:
-#         result = get
-#     return result
-
-
-
-
+def getRisk():
+    result = None
+    payload = dict(request.get_json())
+    get = CitizenRepo.getRiskLevel(payload['age'],payload['housemates'],payload['occupation'])
+    if get:
+        result = get
+    return result
