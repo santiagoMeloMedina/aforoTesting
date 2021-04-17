@@ -78,6 +78,6 @@ def fillCategories():
        my_cursor.execute(query,(category,))
        my_db.commit()
 
-# fillCategories()
+fillCategories()
 fillParameters()
 # deleteParameters()

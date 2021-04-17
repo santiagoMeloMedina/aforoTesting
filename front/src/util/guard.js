@@ -6,5 +6,5 @@ export default ({ component: Component, authorized, redirect, ...params }) => {
     const render = (props) => (
         authorized() ? <Component {...props}/> : <Redirect to={redirect ?? "/"}/>
     );
-    return <Route {...params} render={render} />;
+    return params.nested ? <Route {...params} render={render} /> : <Route exact {...params} render={render} />;
 }

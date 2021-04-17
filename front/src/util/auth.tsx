@@ -22,6 +22,15 @@ export default class Auth {
         return tokenCookie ?? "";
     }
 
+    static isSpecifiedRole(role: string) {
+        let result: boolean = false;
+        const data: any = jwt_decode(this.getToken());
+        if (data["role"]) {
+            result = data["role"] == role;
+        }
+        return result;
+    }
+
     static setTokenCookie(token: string) {
         Cookies.set("token", token);
     }

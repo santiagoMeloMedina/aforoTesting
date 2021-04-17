@@ -25,7 +25,11 @@ def authenticate():
     result = None
     payload = dict(request.get_json())
     auth = UserRepo.authenticate(payload["username"], payload["password"])
-    encoded = jwt.encode({"user" : payload["username"]}, SK, algorithm=JWT_ALG)
+    encoded = jwt.encode(
+        {
+            "user" : payload["username"], 
+            "role": UserRepo.getUserRole(payload["username"])
+        }, SK, algorithm=JWT_ALG)
     if auth:
         result = encoded
     return result
