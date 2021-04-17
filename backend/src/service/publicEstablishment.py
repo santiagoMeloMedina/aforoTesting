@@ -7,7 +7,6 @@ from datetime import datetime
 def add():
     result = None
     payload = dict(request.get_json())
-    print(payload)
     add_user = UserRepo.insertUser(payload["username"], payload["password"], payload["city"], payload["neighborhood"])
     if add_user:
         try:
@@ -17,7 +16,6 @@ def add():
             else:
                 UserRepo.deleteUser(payload["username"])
         except Exception as e:
-            print(e)
             UserRepo.deleteUser(payload["username"])
     return result
 
