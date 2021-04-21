@@ -37,7 +37,7 @@ def getRiskEntriesLevel(username):
     entries = list(getEntriesCitizen(username))
     categoryPE,result,checked = list(),0.0,set()
     for i in range(len(entries)):
-        query = "SELECT category.name from PublicEstablishment inner join Category on  (category.id = PublicEstablishment.category)  where PublicEstablishment.username=%s"
+        query = "SELECT category.name from PublicEstablishment inner join Category on  (Category.id = PublicEstablishment.category)  where PublicEstablishment.username=%s"
         values = (entries[i][4],)
         result = db.query(query,values)
         categoryPE.append(result[0][0])
