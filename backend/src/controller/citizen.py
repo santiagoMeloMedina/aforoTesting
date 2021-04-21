@@ -69,7 +69,7 @@ def getRisk():
 
 @app.route("/citizen/get-risk-entries", methods=['POST'])
 @auth(ROLES.CITIZEN)
-def getRisk():
+def getRiskEntries():
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
         response = CitizenService.getRiskEntries()
