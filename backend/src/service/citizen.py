@@ -43,6 +43,14 @@ def update():
         result = get()
     return result
 
+def getRiskEntries():
+    result = None
+    payload = dict(request.get_json())
+    get = CitizenRepo.getRiskEntriesLevel(payload['username'])
+    if get:
+        result = get
+    return result
+
 def getRisk():
     result = None
     payload = dict(request.get_json())

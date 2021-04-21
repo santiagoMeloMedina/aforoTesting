@@ -32,10 +32,53 @@ def getEntriesCitizen(username):
     result = db.query(query,values)
     return result
 
+
+def getRiskEntriesLevel(username):
+    entries = list(getEntriesCitizen(username))
+    categoryPE,result,checked = list(),0.0,set()
+    for i in range(len(entries)):
+        query = "SELECT Category.name from PublicEstablishment inner join Category on  (Category.id = PublicEstablishment.category)  where PublicEstablishment.username=%s"
+        values = (entries[i][4],)
+        currentResult = db.query(query,values)
+        categoryPE.append(currentResult[0][0])
+    #['restaurante','cine','hotel','casino','supermercado','centro comercial']
+    for entry in categoryPE:
+        if entry not in checked:
+            if entry == "restaurante":
+                result += 5.0
+            elif entry == "cine":
+                result += 3.0
+            elif entry == "hotel":
+                result += 7.0
+            elif entry == "casino":
+                result += 3.0
+            elif entry == "supermercado":
+                result += 6.0
+            else: #entry == "centro comercial":
+                result += 10.0      
+            checked.add(entry)
+    return result
+
+
 def getRiskLevel(age,housemates,occupation):
-    query = "SELECT percent from Parameters where tpe = %s and val = %s"
-    valuesAge = ("age",age)
-    valuesHousemates = ("housemates",housemates)
-    valuesOccupation = ("occupation",occupation)
-    result = db.query(query,valuesAge)[0][0] + db.query(query,valuesHousemates)[0][0] + db.query(query,valuesOccupation)[0][0]
+    #query = "SELECT percent from Parameters where tpe = %s and val = %s"
+    #valuesAge = ("age",age)
+    #valuesHousemates = ("housemates",housemates)
+    #valuesOccupation = ("occupation",occupation)
+    #result = db.query(query,valuesAge)[0][0] + db.query(query,valuesHousemates)[0][0] + db.query(query,valuesOccupation)[0][0]
+    result = 0.0
+    if(occupation == "home"):
+        result += 3.0
+    else:
+        result += 7.0  
+    if(age > 0):
+        if( age <= 20):
+            result += 3.0
+        elif (age <= 30 ):
+            result += 6.0
+        elif (age <= 70):
+            result += 10.0
+        else:
+            result += 12.0
+    result += housemates*1.0
     return result

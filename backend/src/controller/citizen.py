@@ -64,3 +64,16 @@ def getRisk():
     except Exception as e:
         print(e)
     return jsonify(result)
+
+
+
+@app.route("/citizen/get-risk-entries", methods=['POST'])
+@auth(ROLES.CITIZEN)
+def getRiskEntries():
+    result = { VALUES.REPONSE: VALUES.ERROR }
+    try:
+        response = CitizenService.getRiskEntries()
+        result[VALUES.REPONSE] = response
+    except Exception as e:
+        print(e)
+    return jsonify(result)
