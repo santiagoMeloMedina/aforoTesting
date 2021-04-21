@@ -84,24 +84,26 @@ class CreateAccount extends Component<CreateAccountProps, CreateAccountState> {
 
     render() {
         return (
-            <div>
-                <img src="logo.jpg" className={styles.image}/>
-                <div className={styles.fields}>
-                    <input placeholder={"Correo Electronico"} onChange={(e) => this.changeInput(e, "email")}></input>
-                    <input placeholder={"Contraseña"} type="password" onChange={(e) => this.changeInput(e, "password")}></input>
-                    <input placeholder={"Confirmar Contraseña"} type="password" onChange={(e) => this.changeInput(e, "cpassword")}></input>
-                    <input placeholder={"Barrio"} type="password" onChange={(e) => this.changeInput(e, "neighborhood")}></input>
-                    <input placeholder={"Ciudad"} type="password" onChange={(e) => this.changeInput(e, "city")}></input>
-                    <select placeholder={"Elegir tipo de usuario"} onChange={(e) => this.changeInput(e, "type")}>
-                        {
-                            this.types.map((tpe) => {
-                                return <option value={tpe.key}>{tpe.name}</option>
-                            })
-                        }
-                    </select>
+            <div className={styles.container}>
+                <div className={styles.box}>
+                    <img src="logo.png" className={styles.image}/>
+                    <div className={styles.fields}>
+                        <input placeholder={"Correo Electronico"} onChange={(e) => this.changeInput(e, "email")}></input>
+                        <input placeholder={"Contraseña"} type="password" onChange={(e) => this.changeInput(e, "password")}></input>
+                        <input placeholder={"Confirmar Contraseña"} type="password" onChange={(e) => this.changeInput(e, "cpassword")}></input>
+                        <input placeholder={"Barrio"} type="password" onChange={(e) => this.changeInput(e, "neighborhood")}></input>
+                        <input placeholder={"Ciudad"} type="password" onChange={(e) => this.changeInput(e, "city")}></input>
+                        <select placeholder={"Elegir tipo de usuario"} onChange={(e) => this.changeInput(e, "type")}>
+                            {
+                                this.types.map((tpe) => {
+                                    return <option value={tpe.key}>{tpe.name}</option>
+                                })
+                            }
+                        </select>
+                    </div>
+                    {this.renderType()}
+                    <button className={styles.button} onClick={this.createAccount}>Create Account</button>
                 </div>
-                {this.renderType()}
-                <button className={styles.button} onClick={this.createAccount}>Create Account</button>
             </div>
         );
     }
