@@ -43,12 +43,14 @@ class Login extends Component<LoginProps, LoginState> {
 
     render() {
         return (
-            <div>
-                <img src="logo.jpg" className={styles.image}/>
-                <div className={styles.fields}>
-                    <input placeholder={"Correo Electronico"} onChange={(e) => this.changeInput(e, "email")}></input>
-                    <input placeholder={"Contraseña"} type="password" onChange={(e) => this.changeInput(e, "password")}></input>
-                    <button onClick={this.login}>Inicia sesión</button>
+            <div className={styles.container}>
+                <div className={styles.box}>
+                    <img src="logo.png" className={styles.image}/>
+                    <div className={styles.fields}>
+                        <input placeholder={"Correo Electronico"} onChange={(e) => this.changeInput(e, "email")}></input>
+                        <input placeholder={"Contraseña"} type="password" onChange={(e) => this.changeInput(e, "password")}></input>
+                        <button onClick={this.login}>Inicia sesión</button>
+                    </div>
                 </div>
             </div>
         );
