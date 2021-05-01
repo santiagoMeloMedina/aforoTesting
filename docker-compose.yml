@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+
+    at_app:
+        build: ./backend
+        container_name: at_app
+        ports:
+            - "4001:4001"
+        env_file:
+            - ./backend/docker-compose.env.yml
+        networks:
+            - aforo
+    
+    at_database:
+        build: ./database
+        container_name: at_database
+        ports:
+            - '4000:3306'
+        expose:
+            - '4000'
+        networks:
+            - aforo
+        
+networks:
+    aforo:
+        

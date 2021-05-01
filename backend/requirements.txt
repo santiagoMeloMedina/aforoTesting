@@ -1,0 +1,5 @@
+
+Flask==1.1.2
+mysql-connector-python==8.0.23
+pyjwt==2.0.1
+Flask-Cors==3.0.9
