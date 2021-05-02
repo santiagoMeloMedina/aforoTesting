@@ -32,6 +32,16 @@ def get():
         print(e)
     return jsonify(result)
 
+@app.route("/publicEstablishment/get/categories", methods=['GET'])
+def getCategories():
+    result = { VALUES.REPONSE: VALUES.ERROR }
+    try:
+        response = PublicEstablishmentService.getCategories()
+        result[VALUES.REPONSE] = response
+    except Exception as e:
+        print(e)
+    return jsonify(result)
+
 @app.route("/publicEstablishment/entries", methods=['POST'])
 @auth(ROLES.PUBLIC_ESTABLISHMENT)
 def entries():

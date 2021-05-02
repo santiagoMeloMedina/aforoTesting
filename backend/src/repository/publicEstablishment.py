@@ -16,6 +16,11 @@ def get(username):
     result = db.query(query,values)
     return result
 
+def getCategories():
+    query = "SELECT * from Category"
+    result = db.query(query,())
+    return result
+
 def getEntriesPublicEstablishment(username):
     query = "SELECT id,inDate,outDate,citizenUsername,publicEstUsername,temperature,mask from Entries where publicEstUsername=%s"
     values = (username,)

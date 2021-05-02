@@ -3,6 +3,7 @@ import repository.user as UserRepo
 from flask import request
 from model.publicEstablishment import PublicEstablishment
 from datetime import datetime
+from model.category import Category
 
 def add():
     result = None
@@ -25,6 +26,13 @@ def get():
     get = PublicEstRepo.get(payload["username"])
     if get:
         result = PublicEstablishment().setArr(get[0]).toMap()
+    return result
+
+def getCategories():
+    result = []
+    get = PublicEstRepo.getCategories()
+    for category in get:
+        result.append(Category().setArr(category).toMap())
     return result
 
 def update():
