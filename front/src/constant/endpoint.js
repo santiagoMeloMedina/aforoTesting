@@ -13,5 +13,11 @@ export default {
             URL: "user/get",
             method: "POST"
         }
+    },
+    PUBLIC_ESTABLISHMENT: {
+        GET_CATEGORIES: {
+            URL: "publicEstablishment/get/categories",
+            method: "GET"
+        }
     }
 }

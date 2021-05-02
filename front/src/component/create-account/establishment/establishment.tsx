@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Component } from 'react';
 import styles from './establishment.module.css';
 
+import { getCategories } from '../../../client/public_establishment';
+
 import VALUES from '../../../constant/values';
 
 interface EstablishmentFormProps {
@@ -11,16 +13,21 @@ interface EstablishmentFormProps {
 interface EstablishmentFormState {
     name: string,
     category: string,
-    capacity: string
+    capacity: string,
+    categories: any[]
 }
 
 class EstablishmentForm extends Component<EstablishmentFormProps, EstablishmentFormState> {
 
     constructor(props: any) {
         super(props);
-        this.state = { name: null, category: null, capacity: null }
+        this.state = { name: null, category: null, capacity: null, categories: [] }
         this.changeInput = this.changeInput.bind(this);
         this.props.setGetFields(this.getFields.bind(this))
+        getCategories().then(response => {
+            console.log(response)
+            // this.setState({ categories: response });
+        })
     }
 
     changeInput(e: any, type: string) {
@@ -48,6 +55,11 @@ class EstablishmentForm extends Component<EstablishmentFormProps, EstablishmentF
                     <input placeholder={VALUES.VALIDATION.VALIDATION_VALUES.PUBLIC_ESTABLISHMENT.NAME.NAME} onChange={(e) => this.changeInput(e, "name")}></input>
                     <select onChange={(e) => this.changeInput(e, "category")}>
                         <option value="" disabled selected>{VALUES.VALIDATION.VALIDATION_VALUES.PUBLIC_ESTABLISHMENT.CATEGORY.NAME}</option>
+                        {
+                            this.state.categories.map(category => {
+                                return <option value={category["id"]}>{category["name"]}</option>
+                            })
+                        }
                     </select>
                     <input placeholder={VALUES.VALIDATION.VALIDATION_VALUES.PUBLIC_ESTABLISHMENT.CAPACITY.NAME} onChange={(e) => this.changeInput(e, "capacity")}></input>
                 </div>
