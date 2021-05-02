@@ -15,9 +15,19 @@ export default {
         }
     },
     PUBLIC_ESTABLISHMENT: {
+        CREATE_ACCOUNT: {
+            URL: "publicEstablishment/add",
+            method: "POST"
+        },
         GET_CATEGORIES: {
             URL: "publicEstablishment/get/categories",
             method: "GET"
+        }
+    },
+    CITIZEN: {
+        CREATE_ACCOUNT: {
+            URL: "citizen/add",
+            method: "POST"
         }
     }
 }

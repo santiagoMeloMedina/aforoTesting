@@ -11,16 +11,16 @@ interface CitizenFormProps {
 interface CitizenFormState {
     names: string,
     lastnames: string,
-    age: number,
+    age: string,
     occupation: string,
-    housemates: number
+    housemates: string
 }
 
 class CitizenForm extends Component<CitizenFormProps, CitizenFormState> {
 
     constructor(props: any) {
         super(props);
-        this.state = { names: null, lastnames: null, age: null, occupation: null, housemates: null }
+        this.state = { names: "", lastnames: "", age: "", occupation: "", housemates: "" }
         this.changeInput = this.changeInput.bind(this);
         this.props.setGetFields(this.getFields.bind(this))
     }

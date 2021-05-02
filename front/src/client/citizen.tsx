@@ -8,10 +8,15 @@ export function create_account(username: string, password: string, neighborhood:
         username,
         password,
         neighborhood,
-        city
+        city, 
+        names, 
+        lastnames, 
+        age, 
+        occupation, 
+        housemates
     }
     return new Promise<string>((resolve, reject) => {
-        post(CONST.ENDPOINT.USER.CREATE_ACCOUNT.URL, body).then(result => {
+        post(CONST.ENDPOINT.CITIZEN.CREATE_ACCOUNT.URL, body).then(result => {
             resolve(result["response"]);
         });
     });

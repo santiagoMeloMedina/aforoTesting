@@ -8,7 +8,8 @@ export default {
             EXISTS: `${VALUES.USER.USERNAME.NAME} ya existe`
         },
         PASSWORD: {
-            LENGTH: `${VALUES.USER.PASSWORD.NAME} debe tener entre ${VALUES.USER.PASSWORD.MIN_LENGTH} y ${VALUES.USER.PASSWORD.MAX_LENGTH} caracteres`
+            LENGTH: `${VALUES.USER.PASSWORD.NAME} debe tener entre ${VALUES.USER.PASSWORD.MIN_LENGTH} y ${VALUES.USER.PASSWORD.MAX_LENGTH} caracteres`,
+            CASES: `${VALUES.USER.PASSWORD.NAME} debe contener almenos un caracter MAYUSCULA y otro minuscula`
         },
         CITY: {
             LISTED: `${VALUES.USER.CITY.NAME} no esta listada en las opciones`

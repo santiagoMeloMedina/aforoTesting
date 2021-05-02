@@ -21,12 +21,11 @@ class EstablishmentForm extends Component<EstablishmentFormProps, EstablishmentF
 
     constructor(props: any) {
         super(props);
-        this.state = { name: null, category: null, capacity: null, categories: [] }
+        this.state = { name: "", category: "", capacity: "", categories: [] }
         this.changeInput = this.changeInput.bind(this);
         this.props.setGetFields(this.getFields.bind(this))
         getCategories().then(response => {
-            console.log(response)
-            // this.setState({ categories: response });
+            this.setState({ categories: response });
         })
     }
 

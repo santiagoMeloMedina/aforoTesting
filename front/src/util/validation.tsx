@@ -2,14 +2,27 @@
 import VALUES from '../constant/values';
 import { getUserByUsername } from '../client/user';
 import CITIES_DATA from '../constant/json/cities';
+import { getCategories } from '../client/public_establishment';
 
 class Validation {
 
-    public valid: boolean = true;
-    public errors: string[] = [];
+    protected valid: boolean = true;
+    protected errors: string[] = [];
+    protected pending: number[] = [];
 
-    public validate(): boolean {
-        return this.valid;
+    public validate(): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            const check_pending = () => {
+                setTimeout(() => {
+                    if (this.pending.length > 0) {
+                        check_pending();
+                    } else {
+                        resolve(this.valid);
+                    }
+                }, 50);
+            }
+            check_pending();
+        });
     }
 
     public getErrors(): string[] {
@@ -25,6 +38,7 @@ export class UserValidation extends Validation {
         this.usernameLength(username);
         this.usernameExists(username);
         this.passwordLength(password);
+        this.passwordUpperLowerCase(password);
         this.cityListed(city);
         this.neighborhoodCharacters(neighborhood);
         this.neighborhoodLenght(neighborhood);
@@ -38,10 +52,12 @@ export class UserValidation extends Validation {
     }
 
     protected usernameExists(username: string): void {
+        this.pending.push(0);
         getUserByUsername(username).then(response => {
             const condition: boolean = response == null;
             this.valid = this.valid && condition;
             if (!condition) this.errors.push(VALUES.VALIDATION.VALIDATION_ERROR.USER.USERNAME.EXISTS);
+            this.pending.pop();
         })
     }
 
@@ -50,6 +66,12 @@ export class UserValidation extends Validation {
         (password.length >= VALUES.VALIDATION.VALIDATION_VALUES.USER.PASSWORD.MIN_LENGTH);
         this.valid = this.valid && condition;
         if (!condition) this.errors.push(VALUES.VALIDATION.VALIDATION_ERROR.USER.PASSWORD.LENGTH);
+    }
+
+    protected passwordUpperLowerCase(password: string): void {
+        const condition: boolean = password.match(".*[A-Z].*[a-z].*|.*[a-z].*[A-Z].*")?.length >= 1;
+        this.valid = this.valid && condition;
+        if (!condition) this.errors.push(VALUES.VALIDATION.VALIDATION_ERROR.USER.PASSWORD.CASES);
     }
 
     protected cityListed(city: string): void {
@@ -68,7 +90,7 @@ export class UserValidation extends Validation {
     }
 
     protected neighborhoodCharacters(neighborhood: string): void {
-        const condition: boolean = neighborhood.match("^[A-Za-z0-9 ]+$").length >= 1;
+        const condition: boolean = neighborhood.match("^[A-Za-z0-9 ]+$")?.length >= 1;
         this.valid = this.valid && condition;
         if (!condition) this.errors.push(VALUES.VALIDATION.VALIDATION_ERROR.USER.NEIGHBORHOOD.CHARACTERS);
     }
@@ -99,7 +121,7 @@ export class CitizenValidation extends UserValidation {
     }
 
     protected namesCharacters(names: string): void {
-        const condition: boolean = names.match("^[A-Za-z ]+$").length >= 1;
+        const condition: boolean = names.match("^[A-Za-z ]+$")?.length >= 1;
         this.valid = this.valid && condition;
         if (!condition) this.errors.push(VALUES.VALIDATION.VALIDATION_ERROR.CITIZEN.NAMES.CHARACTERS);
     }
@@ -112,13 +134,13 @@ export class CitizenValidation extends UserValidation {
     }
 
     protected lastnameCharacters(lastname: string): void {
-        const condition: boolean = lastname.match("^[A-Za-z ]+$").length >= 1;
+        const condition: boolean = lastname.match("^[A-Za-z ]+$")?.length >= 1;
         this.valid = this.valid && condition;
         if (!condition) this.errors.push(VALUES.VALIDATION.VALIDATION_ERROR.CITIZEN.LASTNAME.CHARACTERS);
     }
 
     protected ageType(age: string): void {
-        const condition: boolean = age.match("^[0-9]+$").length >= 1;
+        const condition: boolean = age.match("^[0-9]+$")?.length >= 1;
         this.valid = this.valid && condition;
         if (!condition) this.errors.push(VALUES.VALIDATION.VALIDATION_ERROR.CITIZEN.AGE.TYPE);
     }
@@ -131,7 +153,7 @@ export class CitizenValidation extends UserValidation {
     }
 
     protected peopleLivingType(people: string): void {
-        const condition: boolean = people.match("^[0-9]+$").length >= 1;
+        const condition: boolean = people.match("^[0-9]+$")?.length >= 1;
         this.valid = this.valid && condition;
         if (!condition) this.errors.push(VALUES.VALIDATION.VALIDATION_ERROR.CITIZEN.PEOPLE_LIVING.TYPE);
     }
@@ -172,16 +194,20 @@ export class PublicEstablishmentValidation extends UserValidation {
     }
 
     protected categoryListed(category: string): void {
-        /* adecuate with categories endpoint client */
-        const condition: boolean = CITIES_DATA.filter(data => {
-            return data.MUNICIPIO == category;
-        }).length >= 1;
-        this.valid = this.valid && condition;
-        if (!condition) this.errors.push(VALUES.VALIDATION.VALIDATION_ERROR.PUBLIC_ESTABLISHMENT.CATEGORY.LISTED);
+        this.pending.push(0);
+        getCategories().then(response => {
+            const condition: boolean = response?.filter(data => {
+                return data["id"] == category;
+            }).length >= 1;
+            this.valid = this.valid && condition;
+            if (!condition) this.errors.push(VALUES.VALIDATION.VALIDATION_ERROR.PUBLIC_ESTABLISHMENT.CATEGORY.LISTED);
+            this.pending.pop();
+        })
+        
     }
 
     protected capacityType(capacity: string): void {
-        const condition: boolean = capacity.match("^[0-9]+$").length >= 1;
+        const condition: boolean = capacity.match("^[0-9]+$")?.length >= 1;
         this.valid = this.valid && condition;
         if (!condition) this.errors.push(VALUES.VALIDATION.VALIDATION_ERROR.PUBLIC_ESTABLISHMENT.CAPACITY.TYPE);
     }
