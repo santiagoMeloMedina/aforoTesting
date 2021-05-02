@@ -35,6 +35,12 @@ def update():
         result = get()
     return result
 
+def checkForEntry(temperature,mask,publicEstUsername):
+    result = None
+    get = PublicEstRepo.getOccupation(publicEstUsername)
+    result = temperature <= 37.5 and mask and get[0][0]+1<= get[0][1] #actual+1 <= capacity
+    return result
+
 def registerEntry():
     result = None
     payload = dict(request.get_json())
@@ -53,7 +59,6 @@ def registerExit():
     result = None
     payload = dict(request.get_json())
     register = PublicEstRepo.registerExit(payload['citizenUsername'],payload['publicEstUsername'])
-    print(register)
     if register:
         result = { 
                     "username": payload['citizenUsername'], 
@@ -69,13 +74,6 @@ def getEntries():
     get = PublicEstRepo.getEntriesPublicEstablishment(payload['username'])
     if get:
         result = get
-    return result
-
-
-def checkForEntry(temperature,mask,publicEstUsername):
-    result = None
-    get = PublicEstRepo.getOccupation(publicEstUsername)
-    result = temperature <= 37.5 and mask and get[0][0]+1<= get[0][1] #actual+1 <= capacity
     return result
 
 

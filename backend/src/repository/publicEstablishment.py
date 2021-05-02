@@ -69,7 +69,7 @@ def registerExit(citizenUsername, publicEstUsername):
 def getOccupation(publicEstUsername):
     query = "SELECT actual,capacity from PublicEstablishment where username = %s"
     values = (publicEstUsername,)
-    result = db.crud(query,values)
+    result = db.query(query,values)
     return result
 
 
