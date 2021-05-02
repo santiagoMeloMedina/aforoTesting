@@ -73,11 +73,11 @@ def fillParameters():
 
 def fillCategories():
     query = "INSERT INTO Category (name) values (%s)"
-    categories = ['restaurante','cine','hotel','casino','supermercado','centro comercial']
+    categories = ['restaurante','cine','hotel','casino']#,'supermercado','centro comercial']
     for category in categories:
        my_cursor.execute(query,(category,))
        my_db.commit()
 
 fillCategories()
-fillParameters()
+#fillParameters()
 # deleteParameters()
