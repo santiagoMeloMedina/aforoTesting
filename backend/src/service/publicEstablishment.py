@@ -38,13 +38,15 @@ def update():
 def registerEntry():
     result = None
     payload = dict(request.get_json())
-    register = PublicEstRepo.registerEntry(payload['citizenUsername'],payload['publicEstUsername'],payload['temperature'],payload['mask'])
-    if register:
-        result = { 
-                    "username": payload['citizenUsername'], 
-                    "publicEstablishment": payload['publicEstUsername'], 
-                    "date": datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
-                }
+    if checkForEntry(payload['temperature'],payload['mask'],payload['publicEstUsername']):
+        register = PublicEstRepo.registerEntry(payload['citizenUsername'],payload['publicEstUsername'],payload['temperature'],payload['mask'])
+        if register:
+            result = { 
+                        "username": payload['citizenUsername'], 
+                        "publicEstablishment": payload['publicEstUsername'], 
+                        "date": datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
+                    }
+            PublicEstRepo.updateActualEntry(payload['publicEstUsername'])
     return result
 
 def registerExit():
@@ -58,6 +60,7 @@ def registerExit():
                     "publicEstablishment": payload['publicEstUsername'], 
                     "date": datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
                 }
+        PublicEstRepo.updateActualExit(payload['publicEstUsername'])
     return result
 
 def getEntries():
@@ -66,6 +69,13 @@ def getEntries():
     get = PublicEstRepo.getEntriesPublicEstablishment(payload['username'])
     if get:
         result = get
+    return result
+
+
+def checkForEntry(temperature,mask,publicEstUsername):
+    result = None
+    get = PublicEstRepo.getOccupation(publicEstUsername)
+    result = temperature <= 37.5 and mask and get[0][0]+1<= get[0][1] #actual+1 <= capacity
     return result
 
 

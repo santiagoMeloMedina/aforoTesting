@@ -34,6 +34,19 @@ def update(publicEst):
     result = db.crud(query,values)
     return result
 
+def updateActualEntry(publicEstUsername):
+    query = "UPDATE PublicEstablishment set actual = actual+1 where username = %s"
+    values = (publicEstUsername,)
+    result = db.crud(query,values)
+    return result
+
+def updateActualExit(publicEstUsername):
+    query = "UPDATE PublicEstablishment set actual = actual-1 where username = %s"
+    values = (publicEstUsername,)
+    result = db.crud(query,values)
+    return result
+    
+
 def registerEntry(citizenUsername, publicEstUsername, temperature,mask):
     query = "INSERT INTO Entries (citizenUsername,publicEstUsername,temperature,mask) values (%s,%s,%s,%s)"
     values = (citizenUsername,publicEstUsername,temperature,mask)
@@ -53,5 +66,10 @@ def registerExit(citizenUsername, publicEstUsername):
     result = db.crud(query,values)
     return result
 
+def getOccupation(publicEstUsername):
+    query = "SELECT actual,capacity from PublicEstablishment where username = %s"
+    values = (publicEstUsername,)
+    result = db.crud(query,values)
+    return result
 
 
