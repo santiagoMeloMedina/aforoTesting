@@ -3,4 +3,11 @@
 
 .sections {}
 
-.option {}
+.option {
+    text-decoration: none;
+    color: black;
+}
+
+.option:visited{
+    color: black;
+}

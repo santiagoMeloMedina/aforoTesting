@@ -20,8 +20,7 @@ class Section extends Component<SectionProps, SectionState> {
         let menu: any[] = [];
         const options: any = [
             { name: "Historial", path: "/dashboard/history" },
-            { name: "Registro Entrada/Salida", path: "/dashboard/entry", role: CONST.ROLES.PUBLIC_ESTABLISHMENT },
-            { name: "Editar Informacion", path: "/dashboard/edit" },
+            { name: "Entrada/Salida", path: "/dashboard/entry", role: CONST.ROLES.PUBLIC_ESTABLISHMENT },
         ]
         options.forEach(option => {
             if (!option.role || Auth.isSpecifiedRole(option.role))

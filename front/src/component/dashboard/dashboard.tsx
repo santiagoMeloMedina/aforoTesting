@@ -32,21 +32,26 @@ class Dashboard extends Component<DashboardProps, DashboardState> {
     render() {
         const is_public_est: any = () => Auth.isSpecifiedRole(CONST.VALUES.ROLES.PUBLIC_ESTABLISHMENT);
         return (
-            <div className={styles.body}>
-                <div className={styles.menu}>
-                    <button onClick={this.logOut}>Cerrar Sesion</button>
+            <Router>
+                <Switch>
+                <div className={styles.body}>
+                    <div className={styles.box}>
+                        <div className={styles.menu}>
+                            <img src="logo.png" className={styles.image}/>
+                            <div className={styles.buttons}>
+                                <Route exact path="/dashboard" component={Section} />
+                                <button className={styles.logOut} onClick={this.logOut}>Cerrar Sesión</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.sections}>
+                        <Guard nested={true} path="/dashboard/history" component={History} authorized={()=>true} redirect={"/dashboard"}></Guard>
+                        <Guard nested={true} path="/dashboard/entry" component={Entry} authorized={is_public_est} redirect={"/dashboard"}></Guard>
+                        <Guard nested={true} path="/dashboard/edit" component={EditInfo} authorized={()=>true} redirect={"/dashboard"}></Guard>
+                    </div>
                 </div>
-                <div className={styles.sections}>
-                    <Router>
-                        <Switch>
-                            <Route exact path="/dashboard" component={Section} />
-                            <Guard nested={true} path="/dashboard/history" component={History} authorized={()=>true} redirect={"/dashboard"}></Guard>
-                            <Guard nested={true} path="/dashboard/entry" component={Entry} authorized={is_public_est} redirect={"/dashboard"}></Guard>
-                            <Guard nested={true} path="/dashboard/edit" component={EditInfo} authorized={()=>true} redirect={"/dashboard"}></Guard>
-                        </Switch>
-                    </Router>
-                </div>
-            </div>
+                </Switch>
+            </Router>
         );
     }
 }
