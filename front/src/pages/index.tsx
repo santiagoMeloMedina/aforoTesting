@@ -28,6 +28,7 @@ export default class Pages extends Component {
                         <Guard path="/login" component={Login} authorized={notAuthed} redirect={"/dashboard"}></Guard>
                         <Guard path="/create-account" component={CreateAccount} authorized={notAuthed} redirect={"/dashboard"}></Guard>
                         <Guard path="/dashboard" component={Dashboard} authorized={authed} redirect={"/login"}></Guard>
+                        <Guard path="/" component={Dashboard} authorized={()=>false} redirect={"/dashboard"}></Guard>
                         <Route component={NotFound} />
                     </Switch>
                 </Router>

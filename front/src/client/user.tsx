@@ -27,3 +27,14 @@ export function create_account(username: string, password: string, neigh: string
         });
     });
 }
+
+export function getUserByUsername(username: string): Promise<string> {
+    const body: any = {
+        username
+    }
+    return new Promise<string>((resolve, reject) => {
+        post(CONST.ENDPOINT.USER.GET_USERNAME.URL, body).then(result => {
+            resolve(result["response"]);
+        });
+    });
+}
