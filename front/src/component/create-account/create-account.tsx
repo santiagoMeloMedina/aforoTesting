@@ -7,6 +7,7 @@ import { CitizenForm } from './citizen';
 import { EstablishmentForm } from './establishment';
 
 import { create_account } from '../../client/user';
+import CITIES_DATA from '../../constant/json/cities';
 
 interface CreateAccountProps {}
 interface CreateAccountState {
@@ -91,8 +92,15 @@ class CreateAccount extends Component<CreateAccountProps, CreateAccountState> {
                         <input placeholder={"Correo Electronico"} onChange={(e) => this.changeInput(e, "email")}></input>
                         <input placeholder={"Contraseña"} type="password" onChange={(e) => this.changeInput(e, "password")}></input>
                         <input placeholder={"Confirmar Contraseña"} type="password" onChange={(e) => this.changeInput(e, "cpassword")}></input>
-                        <input placeholder={"Barrio"} type="password" onChange={(e) => this.changeInput(e, "neighborhood")}></input>
-                        <input placeholder={"Ciudad"} type="password" onChange={(e) => this.changeInput(e, "city")}></input>
+                        <input placeholder={"Barrio"} onChange={(e) => this.changeInput(e, "neighborhood")}></input>
+                        <select onChange={(e) => this.changeInput(e, "city")}>
+                            <option value="">Seleccionar Ciudad</option>
+                            {
+                                CITIES_DATA.map((value, index) => {
+                                    return <option value={value.MUNICIPIO}>{value.MUNICIPIO}</option>
+                                })
+                            }
+                        </select>
                         <select placeholder={"Elegir tipo de usuario"} onChange={(e) => this.changeInput(e, "type")}>
                             {
                                 this.types.map((tpe) => {
