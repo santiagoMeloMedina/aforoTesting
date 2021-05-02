@@ -10,3 +10,9 @@
     height: 2rem;
     width: 100%;
 }
+
+.fields select {
+    margin: 0.625rem 0 0 0;
+    height: 2rem;
+    width: 100%;
+}

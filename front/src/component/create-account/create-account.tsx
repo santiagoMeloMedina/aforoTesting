@@ -9,6 +9,8 @@ import { EstablishmentForm } from './establishment';
 import { create_account } from '../../client/user';
 import CITIES_DATA from '../../constant/json/cities';
 
+import VALUES from '../../constant/values';
+
 interface CreateAccountProps {}
 interface CreateAccountState {
     email: string,
@@ -69,18 +71,7 @@ class CreateAccount extends Component<CreateAccountProps, CreateAccountState> {
     }
 
     createAccount() {
-        if (this.state.email && this.state.password && this.state.neighborhood && this.state.city) {
-            if (this.state.password == this.state.cpassword) {
-                // create_account(this.email, this.password, this.neighborhood, this.city).then(result => {
-                //     console.log(result);
-                //     console.log(this.getCitizenFields())
-                // })
-            } else {
-                alert("Confirmar contraseña es diferente");
-            }
-        } else {
-            alert("Faltan datos");
-        }
+        console.log(this.getFields())
     }
 
     render() {
@@ -89,12 +80,12 @@ class CreateAccount extends Component<CreateAccountProps, CreateAccountState> {
                 <div className={styles.box}>
                     <img src="logo.png" className={styles.image}/>
                     <div className={styles.fields}>
-                        <input placeholder={"Correo Electronico"} onChange={(e) => this.changeInput(e, "email")}></input>
-                        <input placeholder={"Contraseña"} type="password" onChange={(e) => this.changeInput(e, "password")}></input>
-                        <input placeholder={"Confirmar Contraseña"} type="password" onChange={(e) => this.changeInput(e, "cpassword")}></input>
-                        <input placeholder={"Barrio"} onChange={(e) => this.changeInput(e, "neighborhood")}></input>
+                        <input placeholder={VALUES.VALIDATION.VALIDATION_VALUES.USER.USERNAME.NAME} onChange={(e) => this.changeInput(e, "email")}></input>
+                        <input placeholder={VALUES.VALIDATION.VALIDATION_VALUES.USER.PASSWORD.NAME} type="password" onChange={(e) => this.changeInput(e, "password")}></input>
+                        <input placeholder={VALUES.VALIDATION.VALIDATION_VALUES.USER.PASSWORD.NAME} type="password" onChange={(e) => this.changeInput(e, "cpassword")}></input>
+                        <input placeholder={VALUES.VALIDATION.VALIDATION_VALUES.USER.NEIGHBORHOOD.NAME} onChange={(e) => this.changeInput(e, "neighborhood")}></input>
                         <select onChange={(e) => this.changeInput(e, "city")}>
-                            <option value="">Seleccionar Ciudad</option>
+                            <option value="" disabled selected>{VALUES.VALIDATION.VALIDATION_VALUES.USER.CITY.NAME}</option>
                             {
                                 CITIES_DATA.map((value, index) => {
                                     return <option value={value.MUNICIPIO}>{value.MUNICIPIO}</option>
@@ -110,7 +101,7 @@ class CreateAccount extends Component<CreateAccountProps, CreateAccountState> {
                         </select>
                     </div>
                     {this.renderType()}
-                    <button className={styles.button} onClick={this.createAccount}>Create Account</button>
+                    <button className={styles.button} onClick={this.createAccount}>Crear Cuenta</button>
                 </div>
             </div>
         );

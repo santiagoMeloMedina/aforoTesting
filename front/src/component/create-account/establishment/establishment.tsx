@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Component } from 'react';
 import styles from './establishment.module.css';
 
+import VALUES from '../../../constant/values';
+
 interface EstablishmentFormProps {
     setGetFields: any
 }
@@ -43,9 +45,11 @@ class EstablishmentForm extends Component<EstablishmentFormProps, EstablishmentF
         return (
             <div>
                 <div className={styles.fields}>
-                    <input placeholder={"Nombres"} onChange={(e) => this.changeInput(e, "name")}></input>
-                    <input placeholder={"Apellidos"} onChange={(e) => this.changeInput(e, "category")}></input>
-                    <input placeholder={"Edad"} type="number" onChange={(e) => this.changeInput(e, "capacity")}></input>
+                    <input placeholder={VALUES.VALIDATION.VALIDATION_VALUES.PUBLIC_ESTABLISHMENT.NAME.NAME} onChange={(e) => this.changeInput(e, "name")}></input>
+                    <select onChange={(e) => this.changeInput(e, "category")}>
+                        <option value="" disabled selected>{VALUES.VALIDATION.VALIDATION_VALUES.PUBLIC_ESTABLISHMENT.CATEGORY.NAME}</option>
+                    </select>
+                    <input placeholder={VALUES.VALIDATION.VALIDATION_VALUES.PUBLIC_ESTABLISHMENT.CAPACITY.NAME} onChange={(e) => this.changeInput(e, "capacity")}></input>
                 </div>
             </div>
         );
