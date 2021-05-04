@@ -13,6 +13,7 @@ import { EditInfo } from './section/editinfo';
 import { Section } from './section';
 
 import CONST from '../../constant';
+import { Risk } from './risk';
 
 interface DashboardProps {}
 interface DashboardState {}
@@ -48,6 +49,9 @@ class Dashboard extends Component<DashboardProps, DashboardState> {
                         <Guard nested={true} path="/dashboard/history" component={History} authorized={()=>true} redirect={"/dashboard"}></Guard>
                         <Guard nested={true} path="/dashboard/entry" component={Entry} authorized={is_public_est} redirect={"/dashboard"}></Guard>
                         <Guard nested={true} path="/dashboard/edit" component={EditInfo} authorized={()=>true} redirect={"/dashboard"}></Guard>
+                        {
+                            Auth.isSpecifiedRole(CONST.VALUES.ROLES.CITIZEN) ? <Guard nested={false} path="/dashboard" component={Risk} authorized={()=>true} redirect={"/"}></Guard> : null
+                        }
                     </div>
                 </div>
                 </Switch>
