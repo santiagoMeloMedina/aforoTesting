@@ -54,7 +54,7 @@ def getRiskEntries():
 def getRisk():
     result = None
     payload = dict(request.get_json())
-    get = CitizenRepo.getRiskLevel(payload['age'],payload['housemates'],payload['occupation'])
+    get = CitizenRepo.getRiskLevel(payload['username'])
     if get:
         result = get
     return result

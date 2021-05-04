@@ -60,8 +60,11 @@ def getRiskEntriesLevel(username):
     return result
 
 
-def getRiskLevel(age,housemates,occupation):
-    #query = "SELECT percent from Parameters where tpe = %s and val = %s"
+def getRiskLevel(username):
+    query = "SELECT age, occupation, housemates FROM Citizen where username=%s"
+    values = (username,)
+    result = db.query(query,values)
+    age, occupation, housemates = result[0][0], result[0][1], result[0][2]
     #valuesAge = ("age",age)
     #valuesHousemates = ("housemates",housemates)
     #valuesOccupation = ("occupation",occupation)
