@@ -23,7 +23,6 @@
 .sections {
     position: relative;
     width: 100%;
-    height: calc(100% - 100px);
 }
 
 .buttons{
@@ -51,7 +50,36 @@
     color: black;
 }
 
-@media screen and (max-width: 441px) {
+.jumbotron{
+    margin-top: 1.5625rem;
+    height: 7.5rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 1.875rem;
+    font-size: 2rem;
+    box-shadow: 0.5px 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.img_box{
+    margin-top: 1.5625rem;
+    justify-items: center;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pub_est_img{
+    width: 100%;
+}
+
+@media screen and (max-width: 1080px) {
+    .img_box{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 27.5625rem) {
     .menu{
         flex-direction: column;
         height: auto;
@@ -68,5 +96,7 @@
         font-size: 0.875rem;
         justify-content: center;
     }
-
+    .img_box{
+        width: 100%;
+    }
 }
