@@ -21,14 +21,3 @@ export function create_account(username: string, password: string, neighborhood:
         });
     });
 }
-
-export function getRisk(username):  Promise<string>{
-    const body = {
-        username
-    }
-    return new Promise<string>((resolve, reject) => {
-        post(CONST.ENDPOINT.CITIZEN.GET_RISK.URL, body).then(result => {
-            resolve(result["response"]);
-        });
-    });
-}
