@@ -1,6 +1,7 @@
 
 import jwt_decode from "jwt-decode";
 import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
 
 export default class Auth {
 
@@ -37,6 +38,11 @@ export default class Auth {
 
     static delTokenCookie() {
         Cookies.remove("token")
+    }
+
+    static getUsername(){
+        const decodedToken = jwtDecode(Auth.getToken());
+        return decodedToken['user']
     }
 
 }

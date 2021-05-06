@@ -24,8 +24,8 @@ class Risk extends Component<RiskProps, RiskState> {
     }
 
     fetchRisk = () => {
-        const decodedToken = jwtDecode(Auth.getToken());
-        getRisk(decodedToken['user'])
+        const username = Auth.getUsername()
+        getRisk(username)
          .then( result => 
            this.setState({ risk : result })
          )
