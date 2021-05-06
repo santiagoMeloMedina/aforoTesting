@@ -45,12 +45,22 @@ class Dashboard extends Component<DashboardProps, DashboardState> {
                             </div>
                         </div>
                     </div>
+                    <div className={styles.jumbotron} >
+                        Bienvenido, { Auth.getUsername() }
+                    </div>
                     <div className={styles.sections}>
                         <Guard nested={true} path="/dashboard/history" component={History} authorized={()=>true} redirect={"/dashboard"}></Guard>
                         <Guard nested={true} path="/dashboard/entry" component={Entry} authorized={is_public_est} redirect={"/dashboard"}></Guard>
                         <Guard nested={true} path="/dashboard/edit" component={EditInfo} authorized={()=>true} redirect={"/dashboard"}></Guard>
                         {
                             Auth.isSpecifiedRole(CONST.VALUES.ROLES.CITIZEN) ? <Guard nested={false} path="/dashboard" component={Risk} authorized={()=>true} redirect={"/"}></Guard> : null
+                        }
+                        {
+                            Auth.isSpecifiedRole(CONST.VALUES.ROLES.PUBLIC_ESTABLISHMENT) ? 
+                            <div className={styles.img_box}>
+                                <img className={styles.pub_est_img} src="pub_est.svg"></img> 
+                            </div>
+                            : null
                         }
                     </div>
                 </div>

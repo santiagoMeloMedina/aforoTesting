@@ -28,6 +28,10 @@ export default {
         CREATE_ACCOUNT: {
             URL: "citizen/add",
             method: "POST"
+        },
+        GET_RISK: {
+            URL: "citizen/get-risk",
+            method: "POST"
         }
     }
 }
