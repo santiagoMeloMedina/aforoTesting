@@ -1,0 +1,34 @@
+.tableHead {
+    background-color: #6ddaff;
+}
+
+.table{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table td {
+    text-align: center;
+}
+
+.table tr {
+    height: 3rem;
+}
+
+.table tr:hover:not(:first-child) {
+    background-color: lightgrey;
+    border: 1px solid #ddd;
+
+}
+
+.overflow_div{
+    overflow: auto;
+}
+
+@media screen and (max-width: 500px) {
+    .table{
+        width: 100%;
+    }
+    
+}
