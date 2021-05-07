@@ -32,6 +32,10 @@ export default {
         GET_RISK: {
             URL: "citizen/get-risk",
             method: "POST"
+        },
+        GET_CITIZEN_ENTRIES: {
+            URL: "citizen/entries-citizen",
+            method: "POST"
         }
     }
 }
