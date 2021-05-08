@@ -51,7 +51,7 @@ def getRiskEntriesLevel(username):
             elif entry == "hotel":
                 result += 7.0
             elif entry == "casino":
-                result += 3.0
+                result += 3.5
             # elif entry == "supermercado":
             #     result += 6.0
             # else: #entry == "centro comercial":

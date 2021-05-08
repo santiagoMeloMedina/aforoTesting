@@ -27,3 +27,15 @@ export function getCategories(): Promise<any[]> {
         });
     });
 }
+
+export function getEstablishmentHistory(username) : Promise<string>{
+    const body = {
+        username
+    }
+    return new Promise<string>((resolve, reject) => {
+        post(CONST.ENDPOINT.PUBLIC_ESTABLISHMENT.GET_ESTABLISHMENT_ENTRIES.URL, body).then(result => {
+            resolve(result['response']);
+        })
+
+    })
+}

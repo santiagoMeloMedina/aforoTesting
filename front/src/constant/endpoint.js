@@ -22,6 +22,10 @@ export default {
         GET_CATEGORIES: {
             URL: "publicEstablishment/get/categories",
             method: "GET"
+        },
+        GET_ESTABLISHMENT_ENTRIES: {
+            URL: "publicEstablishment/entries",
+            method: "POST"
         }
     },
     CITIZEN: {

@@ -15,7 +15,9 @@ import { Section } from './section';
 import CONST from '../../constant';
 import { Risk } from './risk';
 
-interface DashboardProps {}
+interface DashboardProps {
+    history: any
+}
 interface DashboardState {}
 
 class Dashboard extends Component<DashboardProps, DashboardState> {
@@ -60,6 +62,7 @@ class Dashboard extends Component<DashboardProps, DashboardState> {
                             <div className={styles.img_box}>
                                 <img className={styles.pub_est_img} src="pub_est.svg"></img> 
                             </div>
+                            
                             : null
                         }
                     </div>
