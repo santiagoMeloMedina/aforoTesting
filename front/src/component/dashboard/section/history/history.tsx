@@ -9,35 +9,44 @@ import Guard from '../../../../util/guard';
 
 import CONST from '../../../../constant';
 
-import { getCitizenHistory } from '../../../../client/citizen';
+import { getCitizenHistory, getEntriesRiskLevel } from '../../../../client/citizen';
 import { getEstablishmentHistory } from '../../../../client/public_establishment';
 
 interface HistoryProps {}
 interface HistoryState {
-    table
-    establishment_table
+    table,
+    establishment_table,
+    risk
 }
 class History extends Component<HistoryProps, HistoryState> {
+    username: any;
 
     constructor(props: any) {
         super(props);
-        this.state = { table : {}, establishment_table : {}};
+        this.state = { table : {}, establishment_table : {}, risk : 0};
+        this.username = Auth.getUsername();
+
     }
 
     getPublicEstablishmentEntries(){
-        const username = Auth.getUsername();
-        getEstablishmentHistory(username)
+        getEstablishmentHistory(this.username)
           .then(result => {
               this.setState({ establishment_table : result });
           })
     }
 
     getCitizenEntries(){
-        const username = Auth.getUsername();
-        getCitizenHistory(username)
+        getCitizenHistory(this.username)
           .then(result => {
               this.setState({ table : result });
           })
+    }
+
+    getRiskLevelByEntries(){
+        getEntriesRiskLevel(this.username)
+        .then(result => {
+            this.setState({ risk : result });
+        })
     }
 
     getTimeDate(dateTime){
@@ -61,48 +70,63 @@ class History extends Component<HistoryProps, HistoryState> {
     }
 
     getCitizenTable(){
-        return Object.keys(this.state.table).map( (key) => {
-            const record = this.state.table[key];
+        if(this.state.table){
+            return Object.keys(this.state.table).map( (key) => {
+                const record = this.state.table[key];
 
-            const entry = this.getTimeDate(record[1]);
-            const exit = this.getTimeDate(record[2]);
-            
-            return (
-                <tr key={record[0]}>
-                    <td> { entry.date } </td>
-                    <td> { entry.time } </td>
-                    <td> { exit.date } </td>
-                    <td> { exit.time } </td>
-                    <td> { record[4]} </td>
-                    <td> { record[5] } </td>
-                </tr>
-            );
-        })        
+                const entry = this.getTimeDate(record[1]);
+                const exit = this.getTimeDate(record[2]);
+                
+                return (
+                    <tr key={record[0]}>
+                        <td> { entry.date } </td>
+                        <td> { entry.time } </td>
+                        <td> { exit.date } </td>
+                        <td> { exit.time } </td>
+                        <td> { record[4]} </td>
+                        <td> { record[5] } </td>
+                    </tr>
+                );
+            });
+        }
+        else{
+            return null;
+        }
     }
 
     getEstablismentTable(){
-        return Object.keys(this.state.establishment_table).map( (key) => {
-            const record = this.state.establishment_table[key];
+        if(this.state.establishment_table){
+            return Object.keys(this.state.establishment_table).map( (key) => {
+                const record = this.state.establishment_table[key];
+    
+                const entry = this.getTimeDate(record[1]);
+                const exit = this.getTimeDate(record[2]);
+                
+                return (
+                    <tr key={record[0]}>
+                        <td> { entry.date } </td>
+                        <td> { entry.time } </td>
+                        <td> { exit.date } </td>
+                        <td> { exit.time } </td>
+                        <td> { record[3]} </td>
+                        <td> { record[5] } </td>
+                    </tr>
+                );
+            })
+        }
+        else{
+            return null;
+        }
+    }
 
-            const entry = this.getTimeDate(record[1]);
-            const exit = this.getTimeDate(record[2]);
-            
-            return (
-                <tr key={record[0]}>
-                    <td> { entry.date } </td>
-                    <td> { entry.time } </td>
-                    <td> { exit.date } </td>
-                    <td> { exit.time } </td>
-                    <td> { record[3]} </td>
-                    <td> { record[5] } </td>
-                </tr>
-            );
-        })        
+    getEntriesRiskLevel(){
+        return this.state.risk;
     }
 
     componentDidMount(){
         if(Auth.isSpecifiedRole(CONST.VALUES.ROLES.CITIZEN)){
             this.getCitizenEntries();
+            this.getRiskLevelByEntries();
         }
         else{
             this.getPublicEstablishmentEntries()
@@ -114,6 +138,14 @@ class History extends Component<HistoryProps, HistoryState> {
             <div>
                 <div className={styles.dashboard_link}>
                     <a href="/dashboard">&#8592;</a>
+                    {
+                        Auth.isSpecifiedRole(CONST.VALUES.ROLES.CITIZEN) ? 
+                        <h4>
+                            Riesgo de contagio: {this.getEntriesRiskLevel()}
+                        </h4>
+                        :
+                        null
+                    }
                 </div>
                 <div className={styles.overflow_div}>
                     <table className={styles.table}>
