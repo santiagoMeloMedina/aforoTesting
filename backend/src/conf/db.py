@@ -15,15 +15,22 @@ class DB:
 
     def query(self, query,values):
         self.cursor.execute(query,values)
+        self.writeFile(query)
         return self.cursor.fetchall()
 
     def crud(self,query,values):
         self.cursor.execute(query,values)
+        self.writeFile(query)
         self.db.commit()
         return self.cursor.rowcount
 
     def close(self):
         self.db.close()
+    
+    def writeFile(self, query):
+        file = open("conf/queries_logs.txt", "a")
+        file.write(str(query) + "\n")
+        file.close()
     
 
 db = DB()

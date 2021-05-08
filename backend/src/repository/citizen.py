@@ -52,10 +52,10 @@ def getRiskEntriesLevel(username):
                 result += 7.0
             elif entry == "casino":
                 result += 3.0
-            elif entry == "supermercado":
-                result += 6.0
-            else: #entry == "centro comercial":
-                result += 10.0      
+            # elif entry == "supermercado":
+            #     result += 6.0
+            # else: #entry == "centro comercial":
+            #     result += 10.0      
             checked.add(entry)
     return result
 
