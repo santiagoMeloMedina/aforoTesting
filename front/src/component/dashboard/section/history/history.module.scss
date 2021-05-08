@@ -6,6 +6,7 @@
     width: 80%;
     margin-left: auto;
     margin-right: auto;
+    background-color: rgba(255, 255, 255, 0.85);
 }
 
 .table td {
@@ -24,10 +25,33 @@
 
 .overflow_div{
     overflow: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.dashboard_link{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dashboard_link a {
+    text-decoration: none;
+    font-size: 3rem;
+}
+
+.dashboard_link a:visited {
+    color: black
 }
 
 @media screen and (max-width: 500px) {
     .table{
+        width: 100%;
+    }
+    .dashboard_link{
         width: 100%;
     }
     

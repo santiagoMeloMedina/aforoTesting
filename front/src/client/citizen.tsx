@@ -44,3 +44,15 @@ export function getCitizenHistory(username) : Promise<string>{
 
     })
 }
+
+export function getEntriesRiskLevel(username) : Promise<string>{
+    const body = {
+        username
+    }
+    return new Promise<string>((resolve, reject) => {
+        post(CONST.ENDPOINT.CITIZEN.GET_RISK_ENTRIES.URL, body).then(result => {
+            resolve(result['response']);
+        })
+
+    })
+}

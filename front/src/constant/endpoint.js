@@ -22,6 +22,10 @@ export default {
         GET_CATEGORIES: {
             URL: "publicEstablishment/get/categories",
             method: "GET"
+        },
+        GET_ESTABLISHMENT_ENTRIES: {
+            URL: "publicEstablishment/entries",
+            method: "POST"
         }
     },
     CITIZEN: {
@@ -35,6 +39,10 @@ export default {
         },
         GET_CITIZEN_ENTRIES: {
             URL: "citizen/entries-citizen",
+            method: "POST"
+        },
+        GET_RISK_ENTRIES: {
+            URL: "/citizen/get-risk-entries",
             method: "POST"
         }
     }
