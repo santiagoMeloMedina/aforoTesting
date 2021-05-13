@@ -39,3 +39,18 @@ export function getEstablishmentHistory(username) : Promise<string>{
 
     })
 }
+
+export function registerEntry(citizenUsername, publicEstUsername, mask, temperature) : Promise<string>{
+    const body = {
+        citizenUsername,
+        publicEstUsername,
+        mask,
+        temperature
+    }
+    return new Promise<string>((resolve, reject) => {
+        post(CONST.ENDPOINT.PUBLIC_ESTABLISHMENT.REGISTER_ENTRY.URL, body).then(result => {
+            resolve(result['response']);
+        })
+
+    })
+}

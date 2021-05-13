@@ -26,6 +26,10 @@ export default {
         GET_ESTABLISHMENT_ENTRIES: {
             URL: "publicEstablishment/entries",
             method: "POST"
+        },
+        REGISTER_ENTRY: {
+            URL: 'publicEstablishment/register-entry',
+            method: 'POST'
         }
     },
     CITIZEN: {
