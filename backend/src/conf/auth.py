@@ -31,7 +31,7 @@ def auth(role):
             try:
                 auth_header = request.headers.get("authorization")
                 payload = jwt.decode(auth_header, KEYS.SECRET_JWT_KEY, algorithms=[KEYS.JWT_ALGORITHM], verify=True)
-                result = roles[role](payload["role"]) if payload["role"] else jsonify({}), 403
+                result = roles[role](payload["role"]) if payload["role"] else jsonify({}), 200
             except Exception as e:
                 result = jsonify({ "response": str(e) }), 403
             return result
