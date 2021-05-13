@@ -26,6 +26,10 @@ export default {
         GET_ESTABLISHMENT_ENTRIES: {
             URL: "publicEstablishment/entries",
             method: "POST"
+        },
+        REGISTER_ENTRY: {
+            URL: 'publicEstablishment/register-entry',
+            method: 'POST'
         }
     },
     CITIZEN: {
@@ -42,7 +46,7 @@ export default {
             method: "POST"
         },
         GET_RISK_ENTRIES: {
-            URL: "/citizen/get-risk-entries",
+            URL: "citizen/get-risk-entries",
             method: "POST"
         }
     }

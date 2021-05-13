@@ -137,7 +137,7 @@ class History extends Component<HistoryProps, HistoryState> {
         return (
             <div>
                 <div className={styles.dashboard_link}>
-                    <a href="/dashboard">&#8592;</a>
+                    <a title="Dashboard" href="/dashboard">&#8592;</a>
                     {
                         Auth.isSpecifiedRole(CONST.VALUES.ROLES.CITIZEN) ? 
                         <h4>

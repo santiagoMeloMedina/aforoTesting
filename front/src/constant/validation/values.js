@@ -68,6 +68,22 @@ export default {
             NAME: "Capacidad",
             ALIAS: "Capacidad maxima de personas",
             MIN: 1
+        },
+        TEMPERATURE:{
+            NAME: "Temperatura"
+        },
+        MASK: {
+            NAME: "Tapabocas",
+            VALUES: [
+                {
+                    NAME: "Si",
+                    KEY: 1
+                },
+                {
+                    NAME: "No",
+                    KEY: 0
+                }
+            ]
         }
     }
 }
