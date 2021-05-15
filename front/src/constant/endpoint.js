@@ -30,6 +30,10 @@ export default {
         REGISTER_ENTRY: {
             URL: 'publicEstablishment/register-entry',
             method: 'POST'
+        },
+        REGISTER_EXIT: {
+            URL: 'publicEstablishment/register-exit',
+            method: 'POST'
         }
     },
     CITIZEN: {

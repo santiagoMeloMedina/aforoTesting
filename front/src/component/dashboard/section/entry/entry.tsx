@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Component } from 'react';
 import styles from './entry.module.scss';
 import VALUES from '../../../../constant/values'
-import { registerEntry } from '../../../../client/public_establishment';
+import { registerEntry, registerExit } from '../../../../client/public_establishment';
 import Auth from '../../../../util/auth';
 
 
@@ -12,7 +12,8 @@ interface EntryProps {}
 interface EntryState {
     username,
     mask,
-    temperature
+    temperature,
+    exitUsername
 }
 
 class Entry extends Component<EntryProps, EntryState> {
@@ -22,7 +23,8 @@ class Entry extends Component<EntryProps, EntryState> {
         this.state = {
             username : "",
             mask: 0,
-            temperature: null
+            temperature: null,
+            exitUsername : ""
         }
     }
 
@@ -36,6 +38,9 @@ class Entry extends Component<EntryProps, EntryState> {
                 break;
             case "temperature":
                 this.setState({ temperature: parseFloat(e.target.value)});
+                break;
+            case "exitUsername":
+                this.setState({ exitUsername: e.target.value});
                 break;
         }
     }
@@ -60,8 +65,22 @@ class Entry extends Component<EntryProps, EntryState> {
           })
     }
 
+    submitExit(){
+        const publicEstablishentUsername = Auth.getUsername();
+        registerExit(this.state.exitUsername, publicEstablishentUsername)
+        .then( result => {
+            if(result === "error"){
+                alert("El usuario debe haber ingresado al establecimiento");
+            }
+            else{
+                alert('La salida se ha registrado exitosamente');
+            }
+            this.setState({ exitUsername : '' });
+        });
+    }
+
     render() {
-        const { username, temperature } = this.state;
+        const { username, temperature, exitUsername } = this.state;
         return (
             <div>
                 <div className={styles.dashboard_link}>
@@ -92,8 +111,8 @@ class Entry extends Component<EntryProps, EntryState> {
 
                     <div className={styles.form}>
                         <h1>Registro de salida</h1>
-                        <input placeholder={VALUES.VALIDATION.VALIDATION_VALUES.USER.USERNAME.NAME}></input>
-                        <button className={styles.buttonStyle}> Registrar </button>
+                        <input value={exitUsername} placeholder={VALUES.VALIDATION.VALIDATION_VALUES.USER.USERNAME.NAME} onChange={(e) => this.changeInputEntry(e, "exitUsername")}></input>                        
+                        <button className={styles.buttonStyle } onClick={() => this.submitExit()}> Registrar </button>
                     </div>
                 </div>
             </div>
