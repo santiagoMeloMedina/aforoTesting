@@ -32,17 +32,25 @@ def getEntriesCitizen(username):
     result = db.query(query,values)
     return result
 
+def getCategoriesCitizen(username):
+    query = "SELECT distinct Category.name from Category inner join (SELECT PublicEstablishment.category as idCat from PublicEstablishment inner join (SELECT id,inDate,outDate,citizenUsername,publicEstUsername as estUser,temperature,mask from aforo.Entries where citizenUsername=%s) as A on (PublicEstablishment.username=estUser) ) as B on (Category.id = idCat)"
+    values = (username,)
+    result = db.query(query,values)
+    return result
+
 
 def getRiskEntriesLevel(username):
-    entries = list(getEntriesCitizen(username))
-    categoryPE,result,checked = list(),0.0,set()
-    for i in range(len(entries)):
-        query = "SELECT Category.name from PublicEstablishment inner join Category on  (Category.id = PublicEstablishment.category)  where PublicEstablishment.username=%s"
-        values = (entries[i][4],)
-        currentResult = db.query(query,values)
-        categoryPE.append(currentResult[0][0])
+    #entries = list(getEntriesCitizen(username))
+    #print(entries)
+    categoryPE,result,checked = list(getCategoriesCitizen(username)),0.0,set()
+    #for i in range(len(entries)):
+    #    query = "SELECT Category.name from PublicEstablishment inner join Category on  (Category.id = PublicEstablishment.category)  where PublicEstablishment.username=%s"
+    #    values = (entries[i][4],)
+    #    currentResult = db.query(query,values)
+    #    categoryPE.append(currentResult[0][0])
     #['restaurante','cine','hotel','casino','supermercado','centro comercial']
     for entry in categoryPE:
+        entry = entry[0]
         if entry not in checked:
             if entry == "restaurante":
                 result += 5.0

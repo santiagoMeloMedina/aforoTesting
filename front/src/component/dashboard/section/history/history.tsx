@@ -125,7 +125,7 @@ class History extends Component<HistoryProps, HistoryState> {
 
     componentDidMount(){
         if(Auth.isSpecifiedRole(CONST.VALUES.ROLES.CITIZEN)){
-            this.getCitizenEntries();
+            //this.getCitizenEntries();
             this.getRiskLevelByEntries();
         }
         else{
@@ -147,7 +147,7 @@ class History extends Component<HistoryProps, HistoryState> {
                         null
                     }
                 </div>
-                <div className={styles.overflow_div}>
+                {/* <div className={styles.overflow_div}>
                     <table className={styles.table}>
                         <tbody>
                             <tr className={styles.tableHead}>
@@ -171,7 +171,7 @@ class History extends Component<HistoryProps, HistoryState> {
                     }
                             </tbody>
                         </table>
-                </div>
+                </div> */}
             </div>
         );
     }
