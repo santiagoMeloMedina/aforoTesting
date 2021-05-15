@@ -54,3 +54,16 @@ export function registerEntry(citizenUsername, publicEstUsername, mask, temperat
 
     })
 }
+
+export function registerExit(citizenUsername, publicEstUsername) : Promise<string>{
+    const body = {
+        citizenUsername,
+        publicEstUsername,
+    }
+    return new Promise<string>((resolve, reject) => {
+        post(CONST.ENDPOINT.PUBLIC_ESTABLISHMENT.REGISTER_EXIT.URL, body).then(result => {
+            resolve(result['response']);
+        })
+
+    })
+}

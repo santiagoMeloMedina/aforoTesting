@@ -21,7 +21,7 @@ class EntriesRisk extends Component<EntriesRiskProps, EntriesRiskState> {
     getRiskLevelByEntries(){
         getEntriesRiskLevel(this.username)
         .then(result => {
-            this.setState({ risk : result });
+            this.setState({ risk : result || 0 });
         })
     }
 

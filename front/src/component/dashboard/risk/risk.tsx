@@ -20,7 +20,7 @@ class Risk extends Component<RiskProps, RiskState> {
 
     constructor(props: any) {
         super(props);
-        this.state = { risk : '' };
+        this.state = { risk : '0' };
     }
 
     fetchRisk = () => {
