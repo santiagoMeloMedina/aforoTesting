@@ -11,6 +11,7 @@ import { History } from './section/history';
 import { Entry } from './section/entry';
 import { EditInfo } from './section/editinfo';
 import { Section } from './section';
+import { EntriesRisk } from './section/entriesRisk'; 
 
 import CONST from '../../constant';
 import { Risk } from './risk';
@@ -56,6 +57,9 @@ class Dashboard extends Component<DashboardProps, DashboardState> {
                         <Guard nested={true} path="/dashboard/edit" component={EditInfo} authorized={()=>true} redirect={"/dashboard"}></Guard>
                         {
                             Auth.isSpecifiedRole(CONST.VALUES.ROLES.CITIZEN) ? <Guard nested={false} path="/dashboard" component={Risk} authorized={()=>true} redirect={"/"}></Guard> : null
+                        }
+                        {
+                            Auth.isSpecifiedRole(CONST.VALUES.ROLES.CITIZEN) ? <Guard nested={false} path="/dashboard/entries-risk" component={EntriesRisk} authorized={()=>true} redirect={"/dashboard"}></Guard> : null
                         }
                         {
                             Auth.isSpecifiedRole(CONST.VALUES.ROLES.PUBLIC_ESTABLISHMENT) ? 

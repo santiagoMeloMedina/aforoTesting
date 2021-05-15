@@ -20,6 +20,7 @@ class Section extends Component<SectionProps, SectionState> {
         let menu: any[] = [];
         const options: any = [
             { name: "Historial", path: "/dashboard/history" },
+            { name: "Riesgo por entradas", path: "/dashboard/entries-risk", role: CONST.ROLES.CITIZEN },
             { name: "Entrada/Salida", path: "/dashboard/entry", role: CONST.ROLES.PUBLIC_ESTABLISHMENT },
         ]
         options.forEach(option => {
