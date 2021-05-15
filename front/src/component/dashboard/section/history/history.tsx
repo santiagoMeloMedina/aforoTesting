@@ -9,21 +9,20 @@ import Guard from '../../../../util/guard';
 
 import CONST from '../../../../constant';
 
-import { getCitizenHistory, getEntriesRiskLevel } from '../../../../client/citizen';
+import { getCitizenHistory } from '../../../../client/citizen';
 import { getEstablishmentHistory } from '../../../../client/public_establishment';
 
 interface HistoryProps {}
 interface HistoryState {
     table,
-    establishment_table,
-    risk
+    establishment_table
 }
 class History extends Component<HistoryProps, HistoryState> {
     username: any;
 
     constructor(props: any) {
         super(props);
-        this.state = { table : {}, establishment_table : {}, risk : 0};
+        this.state = { table : {}, establishment_table : {}};
         this.username = Auth.getUsername();
 
     }
@@ -40,13 +39,6 @@ class History extends Component<HistoryProps, HistoryState> {
           .then(result => {
               this.setState({ table : result });
           })
-    }
-
-    getRiskLevelByEntries(){
-        getEntriesRiskLevel(this.username)
-        .then(result => {
-            this.setState({ risk : result });
-        })
     }
 
     getTimeDate(dateTime){
@@ -119,14 +111,9 @@ class History extends Component<HistoryProps, HistoryState> {
         }
     }
 
-    getEntriesRiskLevel(){
-        return this.state.risk;
-    }
-
     componentDidMount(){
         if(Auth.isSpecifiedRole(CONST.VALUES.ROLES.CITIZEN)){
-            //this.getCitizenEntries();
-            this.getRiskLevelByEntries();
+            this.getCitizenEntries();
         }
         else{
             this.getPublicEstablishmentEntries()
@@ -138,16 +125,8 @@ class History extends Component<HistoryProps, HistoryState> {
             <div>
                 <div className={styles.dashboard_link}>
                     <a title="Dashboard" href="/dashboard">&#8592;</a>
-                    {
-                        Auth.isSpecifiedRole(CONST.VALUES.ROLES.CITIZEN) ? 
-                        <h4>
-                            Riesgo de contagio: {this.getEntriesRiskLevel()}
-                        </h4>
-                        :
-                        null
-                    }
                 </div>
-                {/* <div className={styles.overflow_div}>
+                <div className={styles.overflow_div}>
                     <table className={styles.table}>
                         <tbody>
                             <tr className={styles.tableHead}>
@@ -171,7 +150,7 @@ class History extends Component<HistoryProps, HistoryState> {
                     }
                             </tbody>
                         </table>
-                </div> */}
+                </div>
             </div>
         );
     }

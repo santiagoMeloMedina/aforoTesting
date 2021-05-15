@@ -144,7 +144,7 @@ class CreateAccount extends Component<CreateAccountProps, CreateAccountState> {
                     </div>
                     {this.renderType()}
                     <button className={styles.button} onClick={this.createAccount} disabled={this.state.disabled} >Crear Cuenta</button>
-                    <button className={styles.button} onClick={()=>{this.props.history.push("/login")}} >Ya tienes cuenta beibi?</button>
+                    <button className={styles.button} onClick={()=>{this.props.history.push("/login")}} >Ingresa, si ya tienes cuenta</button>
                 </div>
             </div>
         );
