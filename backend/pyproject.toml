@@ -9,6 +9,7 @@ python = ">=3.6"
 Flask = "1.1.2"
 mysql-connector-python = "8.0.23"
 pyjwt = "2.0.1"
+PyMySQL = "^1.0.2"
 
 [tool.poetry.dev-dependencies]
 Flask-Cors = "3.0.9"
