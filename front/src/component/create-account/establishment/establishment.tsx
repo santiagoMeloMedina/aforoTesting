@@ -25,7 +25,10 @@ class EstablishmentForm extends Component<EstablishmentFormProps, EstablishmentF
         this.changeInput = this.changeInput.bind(this);
         this.props.setGetFields(this.getFields.bind(this))
         getCategories().then(response => {
-            this.setState({ categories: response });
+            console.log(response)
+            if (response) {
+                this.setState({ categories: response });
+            }
         })
     }
 

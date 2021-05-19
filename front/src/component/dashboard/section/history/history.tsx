@@ -15,27 +15,62 @@ import { getEstablishmentHistory } from '../../../../client/public_establishment
 interface HistoryProps {}
 interface HistoryState {
     table,
-    establishment_table
+    establishment_table,
+    pe_pager,
+    ctz_pager
 }
 class History extends Component<HistoryProps, HistoryState> {
     username: any;
 
     constructor(props: any) {
         super(props);
-        this.state = { table : {}, establishment_table : {}};
+        this.state = { table : {}, establishment_table : {}, pe_pager: 0, ctz_pager: 0 };
         this.username = Auth.getUsername();
+        this.forwardPePage = this.forwardPePage.bind(this);
+        this.backPePage = this.backPePage.bind(this);
+        this.forwardCtzPage = this.forwardCtzPage.bind(this);
+        this.backCtzPage = this.backCtzPage.bind(this);
 
     }
 
+    updatePage() {
+        if(Auth.isSpecifiedRole(CONST.VALUES.ROLES.CITIZEN)){
+            this.getCitizenEntries();
+        }
+        else{
+            this.getPublicEstablishmentEntries()
+        }
+    }
+
+    forwardPePage() {
+        this.setState({ pe_pager: this.state.pe_pager+CONST.VALUES.PAGE_SIZE }, this.updatePage);
+    }
+
+    backPePage() {
+        if (this.state.pe_pager-CONST.VALUES.PAGE_SIZE >= 0) {
+            this.setState({ pe_pager: this.state.pe_pager-CONST.VALUES.PAGE_SIZE }, this.updatePage);
+        }
+    }
+
+    forwardCtzPage() {
+        this.setState({ ctz_pager: this.state.ctz_pager+CONST.VALUES.PAGE_SIZE }, this.updatePage);
+    }
+
+    backCtzPage() {
+        if (this.state.ctz_pager-CONST.VALUES.PAGE_SIZE >= 0) {
+            this.setState({ ctz_pager: this.state.ctz_pager-CONST.VALUES.PAGE_SIZE }, this.updatePage);
+        }
+    }
+
     getPublicEstablishmentEntries(){
-        getEstablishmentHistory(this.username)
+        getEstablishmentHistory(this.username, this.state.pe_pager, this.state.pe_pager+CONST.VALUES.PAGE_SIZE)
           .then(result => {
               this.setState({ establishment_table : result });
           })
     }
 
     getCitizenEntries(){
-        getCitizenHistory(this.username)
+        getCitizenHistory(this.username, this.state.ctz_pager, this.state.ctz_pager+CONST.VALUES.PAGE_SIZE)
           .then(result => {
               this.setState({ table : result });
           })
@@ -112,12 +147,7 @@ class History extends Component<HistoryProps, HistoryState> {
     }
 
     componentDidMount(){
-        if(Auth.isSpecifiedRole(CONST.VALUES.ROLES.CITIZEN)){
-            this.getCitizenEntries();
-        }
-        else{
-            this.getPublicEstablishmentEntries()
-        }
+        this.updatePage();
     }
 
     render() {
@@ -150,6 +180,20 @@ class History extends Component<HistoryProps, HistoryState> {
                     }
                             </tbody>
                         </table>
+                        {
+                            Auth.isSpecifiedRole(CONST.VALUES.ROLES.CITIZEN) ? 
+                                <div>
+                                    <button onClick={this.backCtzPage}>{'<'}</button>
+                                    {`${this.state.ctz_pager} - ${this.state.ctz_pager+CONST.VALUES.PAGE_SIZE}`}
+                                    <button onClick={this.forwardCtzPage}>{'>'}</button>
+                                </div>
+                            : 
+                                <div>
+                                    <button onClick={this.backPePage}>{'<'}</button>
+                                    {`${this.state.pe_pager} - ${this.state.pe_pager+CONST.VALUES.PAGE_SIZE}`}
+                                    <button onClick={this.forwardPePage}>{'>'}</button>
+                                </div>
+                        }
                 </div>
             </div>
         );

@@ -28,12 +28,13 @@ export function getCategories(): Promise<any[]> {
     });
 }
 
-export function getEstablishmentHistory(username) : Promise<string>{
+export function getEstablishmentHistory(username, start, quantity) : Promise<string>{
     const body = {
         username
     }
     return new Promise<string>((resolve, reject) => {
-        post(CONST.ENDPOINT.PUBLIC_ESTABLISHMENT.GET_ESTABLISHMENT_ENTRIES.URL, body).then(result => {
+        let url = `${CONST.ENDPOINT.PUBLIC_ESTABLISHMENT.GET_ESTABLISHMENT_ENTRIES.URL}/${start}/${quantity}`;
+        post(url, body).then(result => {
             resolve(result['response']);
         })
 

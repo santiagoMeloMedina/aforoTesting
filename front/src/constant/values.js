@@ -10,5 +10,6 @@ export default {
     VALIDATION: {
         VALIDATION_VALUES,
         VALIDATION_ERROR
-    }
+    },
+    PAGE_SIZE: 10
 }

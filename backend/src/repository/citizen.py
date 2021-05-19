@@ -26,9 +26,9 @@ def update(citizen):
     result = db.crud(query,values)
     return result
 
-def getEntriesCitizen(username):
-    query = "SELECT id,inDate,outDate,citizenUsername,publicEstUsername,temperature,mask from Entries where citizenUsername=%s"
-    values = (username,)
+def getEntriesCitizen(username, start, quantity):
+    query = "SELECT id,inDate,outDate,citizenUsername,publicEstUsername,temperature,mask from Entries where citizenUsername=%s LIMIT %s, %s"
+    values = (username, start, quantity,)
     result = db.query(query,values)
     return result
 
