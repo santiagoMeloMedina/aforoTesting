@@ -2,11 +2,19 @@ version: "3"
 
 services:
 
+    at_app_proxy:
+        build: ./backend/proxy
+        container_name: at_app_proxy
+        ports:
+          - '4001:4001'
+        networks:
+          - aforo
+
     at_app:
         build: ./backend
         container_name: at_app
         ports:
-            - "4001:4001"
+            - "4100:4100"
         env_file:
             - ./backend/docker-compose.env.yml
         networks:
