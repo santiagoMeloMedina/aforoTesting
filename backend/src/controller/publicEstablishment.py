@@ -42,12 +42,12 @@ def getCategories():
         print(e)
     return jsonify(result)
 
-@app.route("/publicEstablishment/entries", methods=['POST'])
+@app.route("/publicEstablishment/entries/<int:start>/<int:quantity>", methods=['POST'])
 @auth(ROLES.PUBLIC_ESTABLISHMENT)
-def entries():
+def entries(start, quantity):
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
-        response = PublicEstablishmentService.getEntries()
+        response = PublicEstablishmentService.getEntries(start, quantity)
         result[VALUES.REPONSE] = response
     except Exception as e:
         print(e)

@@ -27,10 +27,10 @@ def get():
         result = Citizen().setArr(get[0]).toMap()
     return result
 
-def getEntriesCitizen():#check this service!!
+def getEntriesCitizen(start, quantity):#check this service!!
     result = None
     payload = dict(request.get_json())
-    get = CitizenRepo.getEntriesCitizen(payload['username'])
+    get = CitizenRepo.getEntriesCitizen(payload['username'], start, quantity)
     if get:
         result = get
     return result

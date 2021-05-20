@@ -32,12 +32,12 @@ def get():
         print(e)
     return jsonify(result)
 
-@app.route("/citizen/entries-citizen", methods=['POST'])
+@app.route("/citizen/entries-citizen/<int:start>/<int:quantity>", methods=['POST'])
 @auth(ROLES.CITIZEN)
-def getEntriesCitizen():
+def getEntriesCitizen(start, quantity):
     result = { VALUES.REPONSE: VALUES.ERROR }
     try:
-        response = CitizenService.getEntriesCitizen()
+        response = CitizenService.getEntriesCitizen(start, quantity)
         result[VALUES.REPONSE] = response
     except Exception as e:
         print(e)

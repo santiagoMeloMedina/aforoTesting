@@ -33,12 +33,13 @@ export function getRisk(username):  Promise<string>{
     });
 }
 
-export function getCitizenHistory(username) : Promise<string>{
+export function getCitizenHistory(username, start, quantity) : Promise<string>{
     const body = {
         username
     }
     return new Promise<string>((resolve, reject) => {
-        post(CONST.ENDPOINT.CITIZEN.GET_CITIZEN_ENTRIES.URL, body).then(result => {
+        let url = `${CONST.ENDPOINT.CITIZEN.GET_CITIZEN_ENTRIES.URL}/${start}/${quantity}`;
+        post(url, body).then(result => {
             resolve(result['response']);
         })
 

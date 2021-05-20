@@ -76,10 +76,10 @@ def registerExit():
         PublicEstRepo.updateActualExit(payload['publicEstUsername'])
     return result
 
-def getEntries():
+def getEntries(start, quantity):
     result = None
     payload = dict(request.get_json())
-    get = PublicEstRepo.getEntriesPublicEstablishment(payload['username'])
+    get = PublicEstRepo.getEntriesPublicEstablishment(payload['username'], start, quantity)
     if get:
         result = get
     return result
