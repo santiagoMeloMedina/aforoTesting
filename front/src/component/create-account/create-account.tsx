@@ -13,6 +13,7 @@ import CITIES_DATA from '../../constant/json/cities';
 import VALUES from '../../constant/values';
 
 import { CitizenValidation, PublicEstablishmentValidation, UserValidation } from '../../util/validation';
+import { getCategories } from '../../client/public_establishment';
 
 interface CreateAccountProps {
     history: any
@@ -23,7 +24,8 @@ interface CreateAccountState {
     neighborhood: string,
     city: string,
     type: string,
-    disabled: boolean
+    disabled: boolean,
+    categories: any[]
 }
 
 class CreateAccount extends Component<CreateAccountProps, CreateAccountState> {
@@ -34,10 +36,13 @@ class CreateAccount extends Component<CreateAccountProps, CreateAccountState> {
 
     constructor(props: any) {
         super(props);
-        this.state = { username: "", password: "", neighborhood: "", city: "", type: "citizen", disabled: false }
+        this.state = { username: "", password: "", neighborhood: "", city: "", type: "citizen", disabled: false, categories: [] }
         this.createAccount = this.createAccount.bind(this);
         this.changeInput = this.changeInput.bind(this);
         this.renderType = this.renderType.bind(this);
+        getCategories().then(response => {
+            this.setState({ categories: response });
+        })
     }
 
     changeInput(e: any, type: string) {
@@ -91,7 +96,7 @@ class CreateAccount extends Component<CreateAccountProps, CreateAccountState> {
             case "establishment":
                 validation = new PublicEstablishmentValidation(
                     this.state.username, this.state.password, this.state.city, this.state.neighborhood, 
-                    fields.name, fields.category, fields.capacity
+                    fields.name, fields.category, fields.capacity, this.state.categories
                 )
                 create = () => createPEAccount(
                     this.state.username, this.state.password, this.state.neighborhood, this.state.city, 

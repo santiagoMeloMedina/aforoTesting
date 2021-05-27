@@ -10,6 +10,8 @@ Flask = "1.1.2"
 mysql-connector-python = "8.0.23"
 pyjwt = "2.0.1"
 PyMySQL = "^1.0.2"
+selenium = "^3.141.0"
+DBUtils = "^2.0.1"
 
 [tool.poetry.dev-dependencies]
 Flask-Cors = "3.0.9"

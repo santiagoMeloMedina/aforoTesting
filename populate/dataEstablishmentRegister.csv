@@ -1,0 +1,10 @@
+est1;Est;Rest;Cali;Hacienda;restaurante;30;Establecimiento creado
+est;Est;Cinecolombia;Cali;Hacienda;cine;30;Establecimiento creado
+est1;Est;Cinecolombia;Cali;Hacienda;cine;30;Nombre de usuario ya existe
+est;;Cinecolombia;Cali;Hacienda;cine;30;Contraseña debe tener entre 1 y 20 caracteres
+est;Est;;Cali;Hacienda;cine;30;Nombre debe tener entre 1 y 50 caracteres
+est;Est;Cinecolombia;;Hacienda;cine;30;Ciudad no esta listada en las opciones
+est;Est;Cinecolombia;Cali;h@cienda;cine;30;Barrio tiene caracteres no validos, deben ser letras, espacios y/o numeros
+est;Est;Cinecolombia;Cali;Hacienda;;30;Categoria no esta listada en las opciones
+est;Est;Cinecolombia;Cali;Hacienda;cine;-1;Capacidad debe estar ser mayor o igual a 1
+est;Est;Cinecolombia;Cali;Hacienda;cine;1.5;Capacidad debe ser un entero

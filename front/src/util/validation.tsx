@@ -2,7 +2,6 @@
 import VALUES from '../constant/values';
 import { getUserByUsername } from '../client/user';
 import CITIES_DATA from '../constant/json/cities';
-import { getCategories } from '../client/public_establishment';
 
 class Validation {
 
@@ -177,9 +176,12 @@ export class CitizenValidation extends UserValidation {
 
 export class PublicEstablishmentValidation extends UserValidation {
 
+    private categories: any[];
+
     constructor(username: string, password: string, city: string, neighborhood: string,
-        name: string, category: string, capacity: string) {
+        name: string, category: string, capacity: string, categories: any[]) {
         super(username, password, city, neighborhood);
+        this.categories = categories;
         this.nameLength(name);
         this.categoryListed(category);
         this.capacityType(capacity);
@@ -195,15 +197,12 @@ export class PublicEstablishmentValidation extends UserValidation {
 
     protected categoryListed(category: string): void {
         this.pending.push(0);
-        getCategories().then(response => {
-            const condition: boolean = response?.filter(data => {
-                return data["id"] == category;
-            }).length >= 1;
-            this.valid = this.valid && condition;
-            if (!condition) this.errors.push(VALUES.VALIDATION.VALIDATION_ERROR.PUBLIC_ESTABLISHMENT.CATEGORY.LISTED);
-            this.pending.pop();
-        })
-        
+        const condition: boolean = this.categories?.filter(data => {
+            return data["id"] == category;
+        }).length >= 1;
+        this.valid = this.valid && condition;
+        if (!condition) this.errors.push(VALUES.VALIDATION.VALIDATION_ERROR.PUBLIC_ESTABLISHMENT.CATEGORY.LISTED);
+        this.pending.pop();
     }
 
     protected capacityType(capacity: string): void {

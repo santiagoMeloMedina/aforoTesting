@@ -1,0 +1,13 @@
+admin1;Admin;Admin;Melo;Cali;22;Hacienda;3;Remoto;Ciudadano creado
+admin;Admin;Admin;Melo;Cali;22;Hacienda;3;Remoto;Ciudadano creado
+admin1;Admin;Admin;Melo;Cali;22;Hacienda;3;Remoto;Nombre de usuario ya existe
+admin;;Admin;Melo;Cali;22;Hacienda;3;Remoto;Contraseña debe tener entre 1 y 20 caracteres
+admin;Admin;ju4n;Melo;Cali;22;Hacienda;3;Remoto;Nombres tiene caracteres no validos, deben ser letras y/o espacios
+admin;Admin;Admin;M3lo;Cali;22;Hacienda;3;Remoto;Apellidos tiene caracteres no validos, deben ser letras y/o espacios
+admin;Admin;Admin;Melo;;22;Hacienda;3;Remoto;Ciudad no esta listada en las opciones
+admin;Admin;Admin;Melo;Cali;-1;Hacienda;3;Remoto;Edad debe estar en un rango de 100 y 1
+admin;Admin;Admin;Melo;Cali;101;Hacienda;3;Remoto;Edad debe estar en un rango de 100 y 1
+admin;Admin;Admin;Melo;Cali;22;h@cienda;3;Remoto;Barrio tiene caracteres no validos, deben ser letras, espacios y/o numeros
+admin;Admin;Admin;Melo;Cali;22;Hacienda;-1;Remoto;Numero de personas con las que convive debe estar en un rango de 10 y 0
+admin;Admin;Admin;Melo;Cali;22;Hacienda;20;Remoto;Numero de personas con las que convive debe estar en un rango de 10 y 0
+admin;Admin;Admin;Melo;Cali;22;Hacienda;3;;Ocupacion debe ser Remoto o Presencial
