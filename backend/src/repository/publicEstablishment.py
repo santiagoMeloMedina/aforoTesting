@@ -22,7 +22,7 @@ def getCategories():
     return result
 
 def getEntriesPublicEstablishment(username, start, quantity):
-    quantity = 100
+    # quantity = 100
     query = "SELECT id,inDate,outDate,citizenUsername,publicEstUsername,temperature,mask from Entries where publicEstUsername=%s LIMIT %s, %s"
     values = (username, start, quantity,)
     result = db.query(query,values)

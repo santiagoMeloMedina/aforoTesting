@@ -49,17 +49,20 @@ class Entry extends Component<EntryProps, EntryState> {
         const publicEstablishentUsername = Auth.getUsername();
         registerEntry(this.state.username, publicEstablishentUsername, Boolean(this.state.mask), this.state.temperature)
           .then( result => {
+            let alertMessage = '';
             if(result === "error"){
-                alert("El usuario debe estar registrado");
+                alertMessage = 'La visita se ha registrado exitosamente';
             }
             else{
                 if(!Boolean(result)){
-                    alert('El usuario no puede ingresar al establecimiento');
+                    alertMessage = "El usuario debe estar registrado";
                 }
                 else{
-                    alert('La visita se ha registrado exitosamente');
+                    alertMessage = 'El usuario no puede ingresar al establecimiento';
                 }
             }
+            alert(alertMessage);
+            
             this.setState({ temperature : 0 });
             this.setState({ username : '' });
           })
