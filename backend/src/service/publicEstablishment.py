@@ -4,6 +4,7 @@ from flask import request
 from model.publicEstablishment import PublicEstablishment
 from datetime import datetime
 from model.category import Category
+import repository.citizen as CitizenRepo
 
 def add():
     result = None
@@ -53,14 +54,17 @@ def registerEntry():
     result = None
     payload = dict(request.get_json())
     if checkForEntry(payload['temperature'],payload['mask'],payload['publicEstUsername']):
-        register = PublicEstRepo.registerEntry(payload['citizenUsername'],payload['publicEstUsername'],payload['temperature'],payload['mask'])
-        if register:
-            result = { 
-                        "username": payload['citizenUsername'], 
-                        "publicEstablishment": payload['publicEstUsername'], 
-                        "date": datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
-                    }
-            PublicEstRepo.updateActualEntry(payload['publicEstUsername'])
+        if CitizenRepo.get(payload['citizenUsername']):
+            register = PublicEstRepo.registerEntry(payload['citizenUsername'],payload['publicEstUsername'],payload['temperature'],payload['mask'])
+            if register:
+                result = { 
+                            "username": payload['citizenUsername'], 
+                            "publicEstablishment": payload['publicEstUsername'], 
+                            "date": datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
+                        }
+                PublicEstRepo.updateActualEntry(payload['publicEstUsername'])
+        else:
+            result = "error"
     return result
 
 def registerExit():
