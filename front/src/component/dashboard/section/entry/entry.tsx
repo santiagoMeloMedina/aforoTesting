@@ -51,14 +51,14 @@ class Entry extends Component<EntryProps, EntryState> {
           .then( result => {
             let alertMessage = '';
             if(result === "error"){
-                alertMessage = 'La visita se ha registrado exitosamente';
+                alertMessage = "El usuario debe estar registrado";
             }
             else{
                 if(!Boolean(result)){
-                    alertMessage = "El usuario debe estar registrado";
+                    alertMessage = 'El usuario no puede ingresar al establecimiento';
                 }
                 else{
-                    alertMessage = 'El usuario no puede ingresar al establecimiento';
+                    alertMessage = 'La visita se ha registrado exitosamente';
                 }
             }
             alert(alertMessage);
