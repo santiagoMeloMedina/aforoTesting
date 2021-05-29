@@ -1,5 +1,6 @@
 admin;Si;37.5;La visita se ha registrado exitosamente
+aadmin;Si;37.5;El usuario debe estar registrado
+sant;Si;37.5;La visita se ha registrado exitosamente
 admin;No;37.5;El usuario no puede ingresar al establecimiento
 admin;Si;40;El usuario no puede ingresar al establecimiento
-sant;Si;37.5;La visita se ha registrado exitosamente
 sant2;Si;37.5;El usuario no puede ingresar al establecimiento

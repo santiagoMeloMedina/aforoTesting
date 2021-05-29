@@ -39,35 +39,6 @@ selectCity,selectType,selectCategory = Select(selectOptions[0]),Select(selectOpt
 
 createAccount = buttons[0]
 
-"""
-
-username.send_keys('cc')
-password.send_keys('Aa')
-name.send_keys('Aa')
-neighborhood.send_keys('ingenio')
-capacity.send_keys('1.5')
-
-selectCity.select_by_visible_text('Cali')
-selectCategory.select_by_visible_text('cine')
-
-createAccount.click()
-
-messages = []
-try:
-    WebDriverWait(driver, 3).until(EC.alert_is_present(),
-                                'Timed out waiting for PA creation ' +
-                                'confirmation popup to appear.')
-
-    alert = driver.switch_to.alert
-    messages = alert.text.split('•')
-    messages = [message.strip() for message in messages]
-    #alert.accept()
-    #print("alert accepted")
-except TimeoutException:
-    print("no alert")
-print(messages)
-
-"""
 with open('dataEstablishmentRegister.csv') as csv_file:
     csv_reader,i = csv.reader(csv_file, delimiter=';'),1
     for row in csv_reader:
@@ -98,7 +69,6 @@ with open('dataEstablishmentRegister.csv') as csv_file:
             #print("alert accepted")
         except TimeoutException:
             print("no alert")
-        print(messages)
         if i > 1:print("Test {0} {1}".format(i-1,"passed" if expectedResult in messages else "wrong"))
 
         driver.refresh()
