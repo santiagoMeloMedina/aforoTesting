@@ -38,7 +38,7 @@ selectOptions = driver.find_elements_by_tag_name('select')
 username,temperature = inputs[0],inputs[1]
 mask = Select(selectOptions[0])
 register = buttons[1]
-
+ok = False
 with open('dataRegisterEntry.csv') as csv_file:
     csv_reader,i = csv.reader(csv_file, delimiter=';'),1
     for row in csv_reader:
@@ -60,8 +60,7 @@ with open('dataRegisterEntry.csv') as csv_file:
             #print("alert accepted")
         except TimeoutException:
             print("no alert")
-        print("Test {0} {1}".format(i,"passed" if expectedResult == messages else "wrong"))
-
+        if(i != 3):print("Test {0} {1}".format(i if i < 3 else i-1,"passed" if expectedResult == messages else "wrong"))
         driver.refresh()
         driver.get("http://localhost:3000/dashboard/entry")
 
