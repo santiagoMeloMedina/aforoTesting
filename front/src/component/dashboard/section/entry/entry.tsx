@@ -107,7 +107,7 @@ class Entry extends Component<EntryProps, EntryState> {
                                     })
                             }
                         </select>
-                        <input value={temperature} placeholder={VALUES.VALIDATION.VALIDATION_VALUES.PUBLIC_ESTABLISHMENT.TEMPERATURE.NAME} type="number" onChange={(e) => this.changeInputEntry(e, "temperature")}></input>
+                        <input value={temperature} placeholder={VALUES.VALIDATION.VALIDATION_VALUES.PUBLIC_ESTABLISHMENT.TEMPERATURE.NAME} type="number" min={0} onChange={(e) => this.changeInputEntry(e, "temperature")}></input>
                         <button className={styles.buttonStyle} onClick={() => this.submitEntry()} > Registrar </button>
                     </div>
 
